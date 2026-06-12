@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Cup 2026 Fantasy League</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<style>
+
+  :root{
+    --pitch: #0f3d2e;
+    --pitch-light: #1f5c43;
+    --turf-line: rgba(244, 247, 240, 0.14);
+    --chalk: #f4f7f0;
+    --chalk-dim: #c4d2c8;
+    --board: #161821;
+    --board-edge: #2b2f3d;
+    --led: #ffb627;
+    --led-dim: #5c4a22;
+    --gold: #ffd60a;
+    --red-card: #e63946;
+    --yellow-card: #ffd60a;
+    --pos-gk: #ffb627;
+    --pos-def: #4cc9f0;
+    --pos-mdf: #80ed99;
+    --pos-fwd: #ff6b6b;
+
+    --font-display: "Bebas Neue", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-mono: "Space Mono", monospace;
+
+    --radius: 10px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    font-family: var(--font-body);
+    background: var(--pitch);
+    color: var(--chalk);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  /* subtle pitch stripe texture */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      100deg,
+      rgba(255,255,255,0.018) 0px,
+      rgba(255,255,255,0.018) 80px,
+      transparent 80px,
+      transparent 160px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap{
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--turf-line);
+    margin-bottom: 40px;
+  }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--led);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .eyebrow::before{
+    content:"";
+    width: 26px;
+    height: 2px;
+    background: var(--led);
+    display: inline-block;
+  }
+
+  h1{
+    font-family: var(--font-display);
+    font-size: clamp(42px, 9vw, 84px);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--chalk);
+    text-transform: uppercase;
+  }
+
+  h1 span{ color: var(--led); }
+
+  .subtitle{
+    margin-top: 14px;
+    max-width: 540px;
+    color: var(--chalk-dim);
+    font-size: 15px;
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section-title{
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 40px);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+
+  .section-sub{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--chalk-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  section{ margin-bottom: 64px; }
+
+  /* ---------- SUBSTITUTION BOARD (leaderboard rows) ---------- */
+  .standings{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .standing-row{
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--turf-line);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .standing-row:hover{
+    border-color: rgba(255,182,39,0.35);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .standing-row.is-leader{
+    border-color: rgba(255,214,10,0.5);
+    background: linear-gradient(90deg, rgba(255,214,10,0.10), rgba(255,255,255,0.03));
+  }
+
+  /* the actual "board" digit tile */
+  .board-tile{
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--led);
+    background: var(--board);
+    border: 1px solid var(--board-edge);
+    border-radius: 4px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 0 2px rgba(255,182,39,0.06);
+  }
+
+  .standing-row.is-leader .board-tile{
+    color: var(--gold);
+    box-shadow: inset 0 0 0 2px rgba(255,214,10,0.18);
+  }
+
+  .standing-info .team-name{
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.01em;
+  }
+
+  .standing-info .team-meta{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--chalk-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  .standing-pts{
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--chalk);
+    text-align: right;
+    line-height: 1;
+  }
+
+  .standing-pts small{
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--chalk-dim);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* ---------- TEAM CARDS ---------- */
+  .team-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+  }
+
+  .team-card{
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--turf-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .team-card-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .team-card-head:hover{ background: rgba(255,255,255,0.03); }
+
+  .team-card-head .team-name{
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .team-card-head .team-total{
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--led);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chevron{
+    width: 10px; height: 10px;
+    border-right: 2px solid var(--chalk-dim);
+    border-bottom: 2px solid var(--chalk-dim);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .team-card.is-open .chevron{ transform: rotate(-135deg); }
+
+  .player-list{
+    border-top: 1px solid var(--turf-line);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+
+  .team-card.is-open .player-list{
+    max-height: 2000px;
+  }
+
+  .player-row{
+    border-bottom: 1px solid var(--turf-line);
+  }
+
+  .player-row:last-child{ border-bottom: none; }
+
+  .player-summary{
+    display: grid;
+    grid-template-columns: 38px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    cursor: pointer;
+  }
+
+  .player-summary:hover{ background: rgba(255,255,255,0.025); }
+
+  .pos-badge{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 0;
+    color: var(--board);
+  }
+
+  .pos-badge.gk{ background: var(--pos-gk); }
+  .pos-badge.def{ background: var(--pos-def); }
+  .pos-badge.mdf{ background: var(--pos-mdf); }
+  .pos-badge.fwd{ background: var(--pos-fwd); }
+  .pos-badge.unk{ background: var(--chalk-dim); }
+
+  .player-name{
+    font-weight: 600;
+    font-size: 14.5px;
+  }
+
+  .player-games-count{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--chalk-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .player-pts{
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--led);
+    text-align: right;
+  }
+
+  /* per-game breakdown table */
+  .game-table-wrap{
+    display: none;
+    padding: 0 18px 14px 68px;
+  }
+
+  .player-row.is-open .game-table-wrap{ display: block; }
+
+  table.game-table{
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  table.game-table th, table.game-table td{
+    text-align: left;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--turf-line);
+    white-space: nowrap;
+  }
+
+  table.game-table th{
+    color: var(--chalk-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  table.game-table td.pts{
+    color: var(--led);
+    font-weight: 700;
+  }
+
+  .icon-stack{ display:flex; gap:6px; align-items:center; }
+
+  .badge-motm{
+    color: var(--gold);
+  }
+  .badge-yc::after{ content:"▮"; color: var(--yellow-card); }
+  .badge-rc::after{ content:"▮"; color: var(--red-card); }
+
+  table.game-table-scroll{
+    overflow-x: auto;
+  }
+
+  .table-scroll{ overflow-x: auto; }
+
+  /* ---------- LOAD / ERROR STATES ---------- */
+  .status{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--chalk-dim);
+    border: 1px dashed var(--turf-line);
+    border-radius: var(--radius);
+    padding: 22px;
+    text-align: center;
+  }
+
+  .status.error{
+    color: var(--red-card);
+    border-color: rgba(230,57,70,0.4);
+  }
+
+  footer{
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--chalk-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-top: 30px;
+    border-top: 1px solid var(--turf-line);
+  }
+
+  @media (max-width: 520px){
+    .standing-row{ grid-template-columns: 48px 1fr auto; padding: 10px 12px; gap: 12px;}
+    .board-tile{ width: 44px; height: 44px; font-size: 18px; }
+    .standing-pts{ font-size: 24px; }
+    .game-table-wrap{ padding-left: 18px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Friendly Fantasy League · Group Stage Onward</div>
+    <h1>World Cup <span>2026</span> Fantasy</h1>
+    <p class="subtitle">Live standings and squad scoring, pulled straight from <code>data.csv</code>. Reload after the game master updates the sheet to see fresh totals.</p>
+  </header>
+
+  <section id="standings-section">
+    <div class="section-title">Standings</div>
+    <div class="section-sub">Ranked by total points across all games played</div>
+    <div id="standings" class="standings">
+      <div class="status">Loading data.csv&hellip;</div>
+    </div>
+  </section>
+
+  <section id="squads-section">
+    <div class="section-title">Squads</div>
+    <div class="section-sub">Tap a manager to view their 12 picks, tap a player for game-by-game scoring</div>
+    <div id="squads" class="team-grid"></div>
+  </section>
+
+  <footer>Scoring per custom league rules &middot; Total Points column drives all totals</footer>
+
+</div>
+
+<script>
+/*
+  Expects a CSV (default: data.csv, same folder) with one row per
+  player-per-game, including at minimum these columns:
+
+    Team, World Cup Player, Opponent, Position, Total Points
+
+  Any additional stat columns (Goals, Assists, Yellow Cards, etc.)
+  are auto-detected and shown in the per-game breakdown table.
+*/
+
+const CSV_PATH = "data.csv";
+
+const CORE_COLS = new Set([
+  "Team", "World Cup Player", "Opponent", "Position", "Total Points"
+]);
+
+const POS_CLASS = {
+  GK: "gk", DEF: "def", DF: "def", MDF: "mdf", MF: "mdf", FWD: "fwd", FW: "fwd"
+};
+
+function posClass(pos){
+  const key = (pos || "").trim().toUpperCase();
+  return POS_CLASS[key] || "unk";
+}
+
+function num(v){
+  const n = parseFloat(v);
+  return isNaN(n) ? 0 : n;
+}
+
+fetch(CSV_PATH)
+  .then(res => {
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    return res.text();
+  })
+  .then(csvText => {
+    const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+    if(parsed.errors && parsed.errors.length){
+      console.warn("CSV parse warnings:", parsed.errors);
+    }
+    render(parsed.data, parsed.meta.fields || []);
+  })
+  .catch(err => {
+    document.getElementById("standings").innerHTML =
+      `<div class="status error">
+        Couldn't load <strong>${CSV_PATH}</strong> (${err.message}).<br>
+        Make sure data.csv sits next to this HTML file and that you're viewing
+        this page via a local/hosted server (not double-clicking the file).
+      </div>`;
+  });
+
+function render(rows, fields){
+  rows = rows.filter(r => r["Team"] && r["World Cup Player"]);
+
+  // extra stat columns beyond the core ones, in CSV order
+  const extraCols = fields.filter(f => f && !CORE_COLS.has(f) && f.trim() !== "");
+
+  // ---- group: Team -> Player -> [game rows] ----
+  const teams = new Map();
+
+  rows.forEach(row => {
+    const teamName = row["Team"].trim();
+    const playerName = row["World Cup Player"].trim();
+
+    if(!teams.has(teamName)){
+      teams.set(teamName, { players: new Map(), total: 0 });
+    }
+    const team = teams.get(teamName);
+
+    if(!team.players.has(playerName)){
+      team.players.set(playerName, { position: row["Position"] || "", games: [], total: 0 });
+    }
+    const player = team.players.get(playerName);
+
+    const pts = num(row["Total Points"]);
+    player.games.push(row);
+    player.total += pts;
+    team.total += pts;
+  });
+
+  renderStandings(teams);
+  renderSquads(teams, extraCols);
+}
+
+function renderStandings(teams){
+  const el = document.getElementById("standings");
+  const ranked = [...teams.entries()].sort((a,b) => b[1].total - a[1].total);
+
+  if(ranked.length === 0){
+    el.innerHTML = `<div class="status">No rows found in data.csv yet.</div>`;
+    return;
+  }
+
+  el.innerHTML = ranked.map(([teamName, team], i) => {
+    const rank = i + 1;
+    const isLeader = rank === 1 ? " is-leader" : "";
+    return `
+      <a href="#team-${slug(teamName)}" class="standing-row${isLeader}">
+        <div class="board-tile">${rank}</div>
+        <div class="standing-info">
+          <div class="team-name">${escapeHtml(teamName)}</div>
+          <div class="team-meta">${team.players.size} players &middot; ${countGames(team)} games played</div>
+        </div>
+        <div class="standing-pts">${team.total}<small>points</small></div>
+      </a>
+    `;
+  }).join("");
+}
+
+function countGames(team){
+  let n = 0;
+  team.players.forEach(p => n += p.games.length);
+  return n;
+}
+
+function renderSquads(teams, extraCols){
+  const el = document.getElementById("squads");
+  const ranked = [...teams.entries()].sort((a,b) => b[1].total - a[1].total);
+
+  el.innerHTML = ranked.map(([teamName, team]) => {
+    const playersRanked = [...team.players.entries()].sort((a,b) => b[1].total - a[1].total);
+
+    const playerRows = playersRanked.map(([playerName, player]) => {
+      const cls = posClass(player.position);
+      const rowId = slug(teamName) + "-" + slug(playerName);
+
+      return `
+        <div class="player-row" data-row="${rowId}">
+          <div class="player-summary" onclick="togglePlayer('${rowId}')">
+            <div class="pos-badge ${cls}">${escapeHtml((player.position || "?").toUpperCase())}</div>
+            <div>
+              <div class="player-name">${escapeHtml(playerName)}</div>
+              <div class="player-games-count">${player.games.length} game${player.games.length === 1 ? "" : "s"} played</div>
+            </div>
+            <div class="player-pts">${player.total} pts</div>
+          </div>
+          <div class="game-table-wrap">
+            ${gameTable(player.games, extraCols)}
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    return `
+      <div class="team-card" id="team-${slug(teamName)}">
+        <div class="team-card-head" onclick="toggleTeam('${slug(teamName)}')">
+          <div class="team-name">${escapeHtml(teamName)}</div>
+          <div class="team-total">${team.total} pts <span class="chevron"></span></div>
+        </div>
+        <div class="player-list">
+          ${playerRows}
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function gameTable(games, extraCols){
+  // only show extra columns that have at least one non-zero value across these games
+  const usefulCols = extraCols.filter(col =>
+    games.some(g => num(g[col]) !== 0)
+  );
+
+  const head = `
+    <tr>
+      <th>Opponent</th>
+      ${usefulCols.map(c => `<th>${escapeHtml(shortLabel(c))}</th>`).join("")}
+      <th>Pts</th>
+    </tr>
+  `;
+
+  const body = games.map(g => `
+    <tr>
+      <td>${escapeHtml(g["Opponent"] || "—")}</td>
+      ${usefulCols.map(c => `<td>${num(g[c]) || ""}</td>`).join("")}
+      <td class="pts">${num(g["Total Points"])}</td>
+    </tr>
+  `).join("");
+
+  return `
+    <div class="table-scroll">
+      <table class="game-table">
+        ${head}
+        ${body}
+      </table>
+    </div>
+  `;
+}
+
+function shortLabel(col){
+  const map = {
+    "Official Man of the Match": "MOTM",
+    "Yellow Cards": "YC",
+    "Red Cards": "RC",
+    "Tackles Won": "Tkl",
+    "Interceptions": "Int",
+    "Regulation Penalty Kick Misses": "PK Miss",
+    "Penalty Kick Saves": "PK Save",
+    "Goals Against": "GA",
+    "Clean Sheets": "CS",
+    "Clean Sheet": "CS",
+    "Saves": "Sv",
+    "Shots": "Sh",
+    "Assists": "A",
+    "Goals": "G"
+  };
+  return map[col] || col;
+}
+
+function toggleTeam(teamSlug){
+  const card = document.getElementById("team-" + teamSlug);
+  card.classList.toggle("is-open");
+}
+
+function togglePlayer(rowId){
+  const row = document.querySelector(`[data-row="${rowId}"]`);
+  row.classList.toggle("is-open");
+}
+
+function slug(str){
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+</script>
+
+</body>
+</html>
