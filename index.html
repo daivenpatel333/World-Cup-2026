@@ -153,6 +153,10 @@
     border-radius: var(--radius);
     padding: 12px 16px;
     transition: border-color 0.15s ease, background 0.15s ease;
+  
+    /* NEW */
+    text-decoration: none;
+    color: inherit;
   }
 
   .standing-row:hover{
@@ -164,7 +168,15 @@
     border-color: rgba(255,214,10,0.5);
     background: linear-gradient(90deg, rgba(255,214,10,0.10), rgba(255,255,255,0.03));
   }
-
+  
+  .team-color-0 { color: #ff6b6b; }
+  .team-color-1 { color: #4cc9f0; }
+  .team-color-2 { color: #80ed99; }
+  .team-color-3 { color: #ffd60a; }
+  .team-color-4 { color: #c77dff; }
+  .team-color-5 { color: #ff9f1c; }
+  .team-color-6 { color: #f72585; }
+  .team-color-7 { color: #90be6d; }
   /* the actual "board" digit tile */
   .board-tile{
     font-family: var(--font-mono);
@@ -548,11 +560,14 @@ function renderStandings(teams){
   el.innerHTML = ranked.map(([teamName, team], i) => {
     const rank = i + 1;
     const isLeader = rank === 1 ? " is-leader" : "";
+    const colorClass = TEAM_COLORS[i % TEAM_COLORS.length];
     return `
       <a href="#team-${slug(teamName)}" class="standing-row${isLeader}">
         <div class="board-tile">${rank}</div>
         <div class="standing-info">
-          <div class="team-name">${escapeHtml(teamName)}</div>
+          <div class="team-name ${colorClass}">
+            ${escapeHtml(teamName)}
+          </div>
           <div class="team-meta">${team.players.size} players &middot; ${countGames(team)} games played</div>
         </div>
         <div class="standing-pts">${team.total}<small>points</small></div>
@@ -571,7 +586,8 @@ function renderSquads(teams, extraCols){
   const el = document.getElementById("squads");
   const ranked = [...teams.entries()].sort((a,b) => b[1].total - a[1].total);
 
-  el.innerHTML = ranked.map(([teamName, team]) => {
+  el.innerHTML = ranked.map(([teamName, team], i) => {
+    const colorClass = TEAM_COLORS[i % TEAM_COLORS.length];
     const playersRanked = [...team.players.entries()].sort((a,b) => b[1].total - a[1].total);
 
     const playerRows = playersRanked.map(([playerName, player]) => {
@@ -598,7 +614,9 @@ function renderSquads(teams, extraCols){
     return `
       <div class="team-card" id="team-${slug(teamName)}">
         <div class="team-card-head" onclick="toggleTeam('${slug(teamName)}')">
-          <div class="team-name">${escapeHtml(teamName)}</div>
+         <div class="team-name ${colorClass}">
+          ${escapeHtml(teamName)}
+         </div>
           <div class="team-total">${team.total} pts <span class="chevron"></span></div>
         </div>
         <div class="player-list">
