@@ -484,6 +484,17 @@ const POS_CLASS = {
   GK: "gk", DEF: "def", DF: "def", MDF: "mdf", MF: "mdf", FWD: "fwd", FW: "fwd"
 };
 
+const TEAM_COLORS = [
+  "team-color-0",
+  "team-color-1",
+  "team-color-2",
+  "team-color-3",
+  "team-color-4",
+  "team-color-5",
+  "team-color-6",
+  "team-color-7"
+];
+
 function posClass(pos){
   const key = (pos || "").trim().toUpperCase();
   return POS_CLASS[key] || "unk";
