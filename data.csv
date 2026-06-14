@@ -1,4 +1,4 @@
-Team,World Cup Player,Opponent,Position,Official Man of the Match,Goals,Assists,Shots,Tackles Won,Interceptions,Yellow Cards,Red Cards,Regulation Penalty Kick Misses,Saves,Goals Against,Clean Sheets,Penalty Kick Saves,Total Points
+Team,Player,Opposition,Position,Official Man of the Match,Goals,Assists,Shots,Tackles Won,Interceptions,Yellow Cards,Red Cards,Regulation Penalty Kick Misses,Saves,Goals Against,Clean Sheets,Penalty Kick Saves,Total Points
 Nov,Son Heung-min,Czechia,FWD,0,0,0,6,0,0,0,0,0,0,0,0,0,3
 Brett,Kim Min-jae,Czechia,DEF,0,0,0,0,0,2,0,0,0,0,0,0,0,1
 Karthik,Hwang Hee-chan,Czechia,MID,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -6,80 +6,80 @@ Rahul,Gilberto Mora,South Africa,MID,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
 Daiven,Kim Min-jae,Czechia,DEF,0,0,0,0,0,2,0,0,0,0,0,0,0,1
 Ros,Son Heung-min,Czechia,FWD,0,0,0,6,0,0,0,0,0,0,0,0,0,3
 Vohn,Kim Min-jae,Czechia,DEF,0,0,0,0,0,2,0,0,0,0,0,0,0,1
-Nov,Manuel Akanji,n/a,DEF,0,0,,,,,,,,,,,,
-Brett,Alphonso Davies,Bosnia,DEF,0,0,,,,,,,,,,,,
-Karthik,Alphonso Davies,Bosnia,DEF,0,0,,,,,,,,,,,,
-Rahul,Manuel Akanji,n/a,DEF,0,0,,,,,,,,,,,,
-Daiven,Manuel Akanji,n/a,DEF,0,0,,,,,,,,,,,,
-Ros,Manuel Akanji,n/a,DEF,0,0,,,,,,,,,,,,
-Vohn,Granit Xhaka,n/a,MID,0,0,,,,,,,,,,,,
-Nov,Achraf Hakimi,n/a,DEF,0,0,,,,,,,,,,,,
-Brett,Vinicius Junior,n/a,FWD,0,0,,,,,,,,,,,,
-Karthik,Alisson,n/a,GK,0,0,,,,,,,,,,,,
-Rahul,Achraf Hakimi,n/a,DEF,0,0,,,,,,,,,,,,
-Daiven,Achraf Hakimi,n/a,DEF,0,0,,,,,,,,,,,,
-Ros,Bruno Guimaraes,n/a,MID,0,0,,,,,,,,,,,,
-Vohn,Vinicius Junior,n/a,FWD,0,0,,,,,,,,,,,,
-Nov,Christian Pulisic,Paraguay,FWD,0,0,,,,,,,,,,,,
-Brett,Weston McKennie,Paraguay,MID,0,0,,,,,,,,,,,,
-Karthik,Christian Pulisic,Paraguay,FWD,0,0,,,,,,,,,,,,
-Rahul,Kenan Yildiz,n/a,FWD,0,0,,,,,,,,,,,,
-Daiven,Weston McKennie,Paraguay,MID,0,0,,,,,,,,,,,,
-Ros,Tyler Adams,n/a,MID,0,0,,,,,,,,,,,,
-Vohn,Antonee Robinson,n/a,DEF,0,0,,,,,,,,,,,,
-Nov,Moises Caicedo,n/a,MID,0,0,,,,,,,,,,,,
-Brett,Kai Havertz,n/a,FWD,0,0,,,,,,,,,,,,
-Karthik,Antonio Rudiger,n/a,DEF,0,0,,,,,,,,,,,,
-Rahul,Kai Havertz,n/a,FWD,0,0,,,,,,,,,,,,
-Daiven,Manuel Neuer,n/a,GK,0,0,,,,,,,,,,,,
-Ros,Jonathan Tah,n/a,DEF,0,0,,,,,,,,,,,,
-Vohn,Evan Ndicka,n/a,DEF,0,0,,,,,,,,,,,,
-Nov,Virgil van Dijk,n/a,DEF,0,0,,,,,,,,,,,,
-Brett,Virgil van Dijk,n/a,DEF,0,0,,,,,,,,,,,,
-Karthik,Virgil van Dijk,n/a,DEF,0,0,,,,,,,,,,,,
-Rahul,Hiroki Ito,n/a,DEF,0,0,,,,,,,,,,,,
-Daiven,Cody Gakpo,n/a,FWD,0,0,,,,,,,,,,,,
-Ros,Virgil van Dijk,n/a,DEF,0,0,,,,,,,,,,,,
-Vohn,Viktor Gyokeres,n/a,FWD,0,0,,,,,,,,,,,,
-Nov,Thibaut Courtois,n/a,GK,0,0,,,,,,,,,,,,
-Brett,Mohamed El Shenawy,n/a,GK,0,0,,,,,,,,,,,,
-Karthik,Mohamed Salah,n/a,FWD,0,0,,,,,,,,,,,,
-Rahul,Thibaut Courtois,n/a,GK,0,0,,,,,,,,,,,,
-Daiven,Kevin De Bruyne,n/a,MID,0,0,,,,,,,,,,,,
-Ros,Mohamed El Shenawy,n/a,GK,0,0,,,,,,,,,,,,
-Vohn,Kevin De Bruyne,n/a,MID,0,0,,,,,,,,,,,,
-Nov,Mikel Oyarzabal,n/a,FWD,0,0,,,,,,,,,,,,
-Brett,Rodri,n/a,MID,0,0,,,,,,,,,,,,
-Karthik,Pedri,n/a,MID,0,0,,,,,,,,,,,,
-Rahul,Federico Valverde,n/a,MID,0,0,,,,,,,,,,,,
-Daiven,Lamine Yamal,n/a,FWD,0,0,,,,,,,,,,,,
-Ros,Lamine Yamal,n/a,FWD,0,0,,,,,,,,,,,,
-Vohn,Mikel Oyarzabal,n/a,FWD,0,0,,,,,,,,,,,,
-Nov,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,
-Brett,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,
-Karthik,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,
-Rahul,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,
-Daiven,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,
-Ros,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,
-Vohn,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,
-Nov,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,
-Brett,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,
-Karthik,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,
-Rahul,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,
-Daiven,Julian Alvarez,n/a,FWD,0,0,,,,,,,,,,,,
-Ros,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,
-Vohn,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,
-Nov,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,
-Brett,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,
-Karthik,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,
-Rahul,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,
-Daiven,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,
-Ros,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,
-Vohn,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,
-Nov,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,
-Brett,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,
-Karthik,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,
-Rahul,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,
-Daiven,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,
-Ros,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,
-Vohn,Jordan Pickford,n/a,GK,0,0,,,,,,,,,,,,
+Nov,Manuel Akanji,Qatar,DEF,0,0,0,1,0,0,0,0,0,0,0,0,0,0.5
+Brett,Alphonso Davies,Bosnia,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Karthik,Alphonso Davies,Bosnia,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rahul,Manuel Akanji,Qatar,DEF,0,0,0,1,0,0,0,0,0,0,0,0,0,0.5
+Daiven,Manuel Akanji,Qatar,DEF,0,0,0,1,0,0,0,0,0,0,0,0,0,0.5
+Ros,Manuel Akanji,Qatar,DEF,0,0,0,1,0,0,0,0,0,0,0,0,0,0.5
+Vohn,Granit Xhaka,Qatar,MID,0,0,0,2,0,1,0,0,0,0,0,0,0,1.5
+Nov,Achraf Hakimi,Brazil,DEF,0,0,0,3,0,0,0,0,0,0,0,0,0,1.5
+Brett,Vinicius Junior,Morocco,FWD,1,1,0,1,0,0,0,0,0,0,0,0,0,13.5
+Karthik,Alisson,Morocco,GK,0,0,0,0,0,0,0,0,0,2,1,0,0,2
+Rahul,Achraf Hakimi,Brazil,DEF,0,0,0,3,0,0,0,0,0,0,0,0,0,1.5
+Daiven,Achraf Hakimi,Brazil,DEF,0,0,0,3,0,0,0,0,0,0,0,0,0,1.5
+Ros,Bruno Guimaraes,Morocco,MID,0,0,1,1,0,0,0,0,0,0,0,0,0,6.5
+Vohn,Vinicius Junior,Morocco,FWD,1,1,0,1,0,0,0,0,0,0,0,0,0,13.5
+Nov,Christian Pulisic,Paraguay,FWD,0,0,1,0,0,0,0,0,0,0,0,0,0,6
+Brett,Weston McKennie,Paraguay,MID,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Karthik,Christian Pulisic,Paraguay,FWD,0,0,1,0,0,0,0,0,0,0,0,0,0,6
+Rahul,Kenan Yildiz,n/a,FWD,0,0,,,,,,,,,,,,0
+Daiven,Weston McKennie,Paraguay,MID,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Ros,Tyler Adams,Paraguay,MID,0,0,0,0,0,3,1,0,0,0,0,0,0,0
+Vohn,Antonee Robinson,Paraguay,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nov,Moises Caicedo,n/a,MID,0,0,,,,,,,,,,,,0
+Brett,Kai Havertz,n/a,FWD,1,0,,,,,,,,,,,,3
+Karthik,Antonio Rudiger,n/a,DEF,0,0,,,,,,,,,,,,0
+Rahul,Kai Havertz,n/a,FWD,1,0,,,,,,,,,,,,3
+Daiven,Manuel Neuer,n/a,GK,0,0,,,,,,,,,,,,0
+Ros,Jonathan Tah,n/a,DEF,0,0,,,,,,,,,,,,0
+Vohn,Evan Ndicka,n/a,DEF,0,0,,,,,,,,,,,,0
+Nov,Virgil van Dijk,n/a,DEF,0,0,,,,,,,,,,,,0
+Brett,Virgil van Dijk,n/a,DEF,0,0,,,,,,,,,,,,0
+Karthik,Virgil van Dijk,n/a,DEF,0,0,,,,,,,,,,,,0
+Rahul,Hiroki Ito,n/a,DEF,0,0,,,,,,,,,,,,0
+Daiven,Cody Gakpo,n/a,FWD,0,0,,,,,,,,,,,,0
+Ros,Virgil van Dijk,n/a,DEF,0,0,,,,,,,,,,,,0
+Vohn,Viktor Gyokeres,n/a,FWD,0,0,,,,,,,,,,,,0
+Nov,Thibaut Courtois,n/a,GK,0,0,,,,,,,,,,,,0
+Brett,Mohamed El Shenawy,n/a,GK,0,0,,,,,,,,,,,,0
+Karthik,Mohamed Salah,n/a,FWD,0,0,,,,,,,,,,,,0
+Rahul,Thibaut Courtois,n/a,GK,0,0,,,,,,,,,,,,0
+Daiven,Kevin De Bruyne,n/a,MID,0,0,,,,,,,,,,,,0
+Ros,Mohamed El Shenawy,n/a,GK,0,0,,,,,,,,,,,,0
+Vohn,Kevin De Bruyne,n/a,MID,0,0,,,,,,,,,,,,0
+Nov,Mikel Oyarzabal,n/a,FWD,0,0,,,,,,,,,,,,0
+Brett,Rodri,n/a,MID,0,0,,,,,,,,,,,,0
+Karthik,Pedri,n/a,MID,0,0,,,,,,,,,,,,0
+Rahul,Federico Valverde,n/a,MID,0,0,,,,,,,,,,,,0
+Daiven,Lamine Yamal,n/a,FWD,0,0,,,,,,,,,,,,0
+Ros,Lamine Yamal,n/a,FWD,0,0,,,,,,,,,,,,0
+Vohn,Mikel Oyarzabal,n/a,FWD,0,0,,,,,,,,,,,,0
+Nov,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,0
+Brett,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,0
+Karthik,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,0
+Rahul,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,0
+Daiven,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,0
+Ros,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,0
+Vohn,Kylian Mbappe,n/a,FWD,0,0,,,,,,,,,,,,0
+Nov,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,0
+Brett,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,0
+Karthik,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,0
+Rahul,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,0
+Daiven,Julian Alvarez,n/a,FWD,0,0,,,,,,,,,,,,0
+Ros,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,0
+Vohn,Lionel Messi,n/a,FWD,0,0,,,,,,,,,,,,0
+Nov,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,0
+Brett,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,0
+Karthik,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,0
+Rahul,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,0
+Daiven,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,0
+Ros,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,0
+Vohn,Bruno Fernandes,n/a,MID,0,0,,,,,,,,,,,,0
+Nov,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,0
+Brett,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,0
+Karthik,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,0
+Rahul,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,0
+Daiven,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,0
+Ros,Harry Kane,n/a,FWD,0,0,,,,,,,,,,,,0
+Vohn,Jordan Pickford,n/a,GK,0,0,,,,,,,,,,,,0
