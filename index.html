@@ -153,7 +153,7 @@
     border-radius: var(--radius);
     padding: 12px 16px;
     transition: border-color 0.15s ease, background 0.15s ease;
-  
+
     /* NEW */
     text-decoration: none;
     color: inherit;
@@ -168,7 +168,7 @@
     border-color: rgba(255,214,10,0.5);
     background: linear-gradient(90deg, rgba(255,214,10,0.10), rgba(255,255,255,0.03));
   }
-  
+
   .team-color-0 { color: #ff6b6b; }
   .team-color-1 { color: #4cc9f0; }
   .team-color-2 { color: #80ed99; }
@@ -399,6 +399,54 @@
 
   .table-scroll{ overflow-x: auto; }
 
+  /* ---------- SCORING RULES ---------- */
+  .scoring-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+
+  .scoring-card{
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--turf-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .scoring-card-head{
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--turf-line);
+    font-family: var(--font-display);
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .scoring-row{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--turf-line);
+    font-size: 14px;
+  }
+
+  .scoring-row:last-child{ border-bottom: none; }
+
+  .scoring-stat{ color: var(--chalk); }
+
+  .scoring-pts{
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .scoring-pts.positive{ color: var(--led); }
+  .scoring-pts.negative{ color: var(--red-card); }
+
   /* ---------- LOAD / ERROR STATES ---------- */
   .status{
     font-family: var(--font-mono);
@@ -431,6 +479,7 @@
     .board-tile{ width: 44px; height: 44px; font-size: 18px; }
     .standing-pts{ font-size: 24px; }
     .game-table-wrap{ padding-left: 18px; }
+    .scoring-grid{ grid-template-columns: 1fr; }
   }
 
 </style>
@@ -457,6 +506,82 @@
     <div class="section-title">Squads</div>
     <div class="section-sub">Tap a manager to view their 12 picks, tap a player for game-by-game scoring</div>
     <div id="squads" class="team-grid"></div>
+  </section>
+
+  <section id="scoring-section">
+    <div class="section-title">Scoring Rules</div>
+    <div class="section-sub">Points per stat, per game played</div>
+    <div class="scoring-grid">
+
+      <div class="scoring-card">
+        <div class="scoring-card-head">All Players</div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Official Man of the Match</div>
+          <div class="scoring-pts positive">+3</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Goals</div>
+          <div class="scoring-pts positive">+10</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Assists</div>
+          <div class="scoring-pts positive">+6</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Shots</div>
+          <div class="scoring-pts positive">+0.5</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Tackles Won</div>
+          <div class="scoring-pts positive">+1</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Interceptions</div>
+          <div class="scoring-pts positive">+0.5</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Yellow Cards</div>
+          <div class="scoring-pts negative">-1.5</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Red Cards</div>
+          <div class="scoring-pts negative">-3</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Regulation Penalty Kick Misses</div>
+          <div class="scoring-pts negative">-5</div>
+        </div>
+      </div>
+
+      <div class="scoring-card">
+        <div class="scoring-card-head">Defenders</div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Clean Sheets</div>
+          <div class="scoring-pts positive">+4</div>
+        </div>
+      </div>
+
+      <div class="scoring-card">
+        <div class="scoring-card-head">Goalkeepers</div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Saves</div>
+          <div class="scoring-pts positive">+2</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Goals Against</div>
+          <div class="scoring-pts negative">-2</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Clean Sheets</div>
+          <div class="scoring-pts positive">+5</div>
+        </div>
+        <div class="scoring-row">
+          <div class="scoring-stat">Penalty Kick Saves</div>
+          <div class="scoring-pts positive">+3</div>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <footer>Scoring per custom league rules &middot; Total Points column drives all totals</footer>
