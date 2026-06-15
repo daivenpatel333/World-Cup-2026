@@ -169,6 +169,48 @@
     background: linear-gradient(90deg, rgba(255,214,10,0.10), rgba(255,255,255,0.03));
   }
 
+  /* ---------- UNIQUENESS BADGE ---------- */
+  .uniqueness-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--turf-line);
+    background: rgba(255,255,255,0.04);
+    color: var(--chalk-dim);
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+
+  .uniqueness-badge .uniqueness-value{
+    color: var(--chalk);
+    font-weight: 700;
+  }
+
+  .uniqueness-badge.tier-high{
+    border-color: rgba(128,237,153,0.4);
+    color: var(--pos-mdf);
+  }
+  .uniqueness-badge.tier-high .uniqueness-value{ color: var(--pos-mdf); }
+
+  .uniqueness-badge.tier-mid{
+    border-color: rgba(255,182,39,0.4);
+    color: var(--led);
+  }
+  .uniqueness-badge.tier-mid .uniqueness-value{ color: var(--led); }
+
+  .uniqueness-badge.tier-low{
+    border-color: rgba(230,57,70,0.35);
+    color: var(--red-card);
+  }
+  .uniqueness-badge.tier-low .uniqueness-value{ color: var(--red-card); }
+
   .team-color-0 { color: #ff6b6b; }
   .team-color-1 { color: #4cc9f0; }
   .team-color-2 { color: #80ed99; }
@@ -680,11 +722,62 @@ function render(rows, fields){
     team.total += pts;
   });
 
-  renderStandings(teams);
+  const uniqueness = computeUniquenessScores(teams);
+
+  renderStandings(teams, uniqueness);
   renderSquads(teams, extraCols);
 }
 
-function renderStandings(teams){
+// For each player, count how many distinct fantasy teams drafted them.
+// A team's uniqueness score (0-100) is the average "rarity" of its 12
+// picks, where a player owned by only 1 team contributes 100 and a
+// player owned by all N teams contributes 0.
+//   rarity(player) = (N - ownerCount(player)) / (N - 1) * 100
+// Scores are then averaged across each team's roster.
+function computeUniquenessScores(teams){
+  const numTeams = teams.size;
+  const scores = new Map();
+
+  if(numTeams <= 1){
+    teams.forEach((_, teamName) => scores.set(teamName, 0));
+    return scores;
+  }
+
+  // playerName -> Set of teamNames that own them
+  const ownerSets = new Map();
+  teams.forEach((team, teamName) => {
+    team.players.forEach((_, playerName) => {
+      if(!ownerSets.has(playerName)){
+        ownerSets.set(playerName, new Set());
+      }
+      ownerSets.get(playerName).add(teamName);
+    });
+  });
+
+  teams.forEach((team, teamName) => {
+    const playerNames = [...team.players.keys()];
+    if(playerNames.length === 0){
+      scores.set(teamName, 0);
+      return;
+    }
+    const totalRarity = playerNames.reduce((sum, playerName) => {
+      const ownerCount = ownerSets.get(playerName).size;
+      const rarity = ((numTeams - ownerCount) / (numTeams - 1)) * 100;
+      return sum + rarity;
+    }, 0);
+    scores.set(teamName, totalRarity / playerNames.length);
+  });
+
+  return scores;
+}
+
+function uniquenessTier(score){
+  if(score >= 66) return "tier-high";
+  if(score >= 33) return "tier-mid";
+  return "tier-low";
+}
+
+function renderStandings(teams, uniqueness){
   const el = document.getElementById("standings");
   const ranked = [...teams.entries()].sort((a,b) => b[1].total - a[1].total);
 
@@ -697,6 +790,8 @@ function renderStandings(teams){
     const rank = i + 1;
     const isLeader = rank === 1 ? " is-leader" : "";
     const colorClass = TEAM_COLORS[i % TEAM_COLORS.length];
+    const uScore = uniqueness.get(teamName) || 0;
+    const uTier = uniquenessTier(uScore);
     return `
       <a href="#team-${slug(teamName)}" class="standing-row${isLeader}">
         <div class="board-tile">${rank}</div>
@@ -705,6 +800,7 @@ function renderStandings(teams){
             ${escapeHtml(teamName)}
           </div>
           <div class="team-meta">${team.players.size} players &middot; ${countGames(team)} games played</div>
+          <div class="uniqueness-badge ${uTier}">Uniqueness <span class="uniqueness-value">${uScore.toFixed(0)}</span>/100</div>
         </div>
         <div class="standing-pts">${team.total}<small>points</small></div>
       </a>
