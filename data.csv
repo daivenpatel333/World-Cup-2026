@@ -41,20 +41,20 @@ Rahul,Hiroki Ito,Netherlands,DEF,0,0,0,1,0,0,0,0,0,0,0,0,0,0.5
 Daiven,Cody Gakpo,Japan,FWD,0,0,0,2,0,1,0,0,0,0,0,0,0,1.5
 Ros,Virgil van Dijk,Japan,DEF,1,1,0,1,0,1,0,0,0,0,0,0,0,14
 Vohn,Viktor Gyokeres,Tunisia,FWD,0,1,1,5,0,0,0,0,0,0,0,0,0,18.5
-Nov,Thibaut Courtois,Eygpt,GK,0,0,,,,,,,,,,,,0
-Brett,Mohamed El Shenawy,Belgium,GK,0,0,,,,,,,,,,,,0
-Karthik,Mohamed Salah,Belgium,FWD,0,0,,,,,,,,,,,,0
-Rahul,Thibaut Courtois,Eygpt,GK,0,0,,,,,,,,,,,,0
-Daiven,Kevin De Bruyne,Eygpt,MID,0,0,,,,,,,,,,,,0
-Ros,Mohamed El Shenawy,Belgium,GK,0,0,,,,,,,,,,,,0
-Vohn,Kevin De Bruyne,Eygpt,MID,0,0,,,,,,,,,,,,0
-Nov,Mikel Oyarzabal,Cape Verde,FWD,0,0,,,,,,,,,,,,0
-Brett,Rodri,Cape Verde,MID,0,0,,,,,,,,,,,,0
-Karthik,Pedri,Cape Verde,MID,0,0,,,,,,,,,,,,0
-Rahul,Federico Valverde,Saudi Arabia,MID,0,0,,,,,,,,,,,,0
-Daiven,Lamine Yamal,Cape Verde,FWD,0,0,,,,,,,,,,,,0
-Ros,Lamine Yamal,Cape Verde,FWD,0,0,,,,,,,,,,,,0
-Vohn,Mikel Oyarzabal,Cape Verde,FWD,0,0,,,,,,,,,,,,0
+Nov,Thibaut Courtois,Eygpt,GK,0,0,0,0,0,0,0,0,0,2,1,0,0,2
+Brett,Mostafa Shobeir,Belgium,GK,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Karthik,Mohamed Salah,Belgium,FWD,0,0,1,1,0,0,0,0,0,0,0,0,0,6.5
+Rahul,Thibaut Courtois,Eygpt,GK,0,0,0,0,0,0,0,0,0,2,1,0,0,2
+Daiven,Kevin De Bruyne,Eygpt,MID,0,0,0,4,0,0,0,0,0,0,0,0,0,2
+Ros,Mostafa Shobeir,Belgium,GK,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vohn,Kevin De Bruyne,Eygpt,MID,0,0,0,4,0,0,0,0,0,0,0,0,0,2
+Nov,Mikel Oyarzabal,Cape Verde,FWD,0,0,0,5,1,0,0,0,0,0,0,0,0,3.5
+Brett,Rodri,Cape Verde,MID,0,0,0,2,2,0,0,0,0,0,0,0,0,3
+Karthik,Pedri,Cape Verde,MID,0,0,0,2,2,1,1,0,0,0,0,0,0,2
+Rahul,Federico Valverde,Saudi Arabia,MID,1,0,0,3,0,1,0,0,0,0,0,0,0,5
+Daiven,Lamine Yamal,Cape Verde,FWD,0,0,0,2,0,0,0,0,0,0,0,0,0,1
+Ros,Lamine Yamal,Cape Verde,FWD,0,0,0,2,0,0,0,0,0,0,0,0,0,1
+Vohn,Mikel Oyarzabal,Cape Verde,FWD,0,0,0,5,1,0,0,0,0,0,0,0,0,3.5
 Nov,Kylian Mbappe,Senegal,FWD,0,0,,,,,,,,,,,,0
 Brett,Kylian Mbappe,Senegal,FWD,0,0,,,,,,,,,,,,0
 Karthik,Kylian Mbappe,Senegal,FWD,0,0,,,,,,,,,,,,0
@@ -72,7 +72,7 @@ Vohn,Lionel Messi,Algeria,FWD,0,0,,,,,,,,,,,,0
 Nov,Bruno Fernandes,DR Congo,MID,0,0,,,,,,,,,,,,0
 Brett,Bruno Fernandes,DR Congo,MID,0,0,,,,,,,,,,,,0
 Karthik,Bruno Fernandes,DR Congo,MID,0,0,,,,,,,,,,,,0
-Rahul,Bruno Fernandes,DR Congo,MID,0,0,,,,,,,,,,,,0
+Rahul,Cristiano Ronaldo,DR Congo,FWD,0,0,,,,,,,,,,,,0
 Daiven,Bruno Fernandes,DR Congo,MID,0,0,,,,,,,,,,,,0
 Ros,Bruno Fernandes,DR Congo,MID,0,0,,,,,,,,,,,,0
 Vohn,Bruno Fernandes,DR Congo,MID,0,0,,,,,,,,,,,,0
@@ -80,6 +80,6 @@ Nov,Harry Kane,Croatia,FWD,0,0,,,,,,,,,,,,0
 Brett,Harry Kane,Croatia,FWD,0,0,,,,,,,,,,,,0
 Karthik,Harry Kane,Croatia,FWD,0,0,,,,,,,,,,,,0
 Rahul,Harry Kane,Croatia,FWD,0,0,,,,,,,,,,,,0
-Daiven,Harry Kane,Croatia,FWD,0,0,,,,,,,,,,,,0
+Daiven,Jude Bellingham,Croatia,MID,0,0,,,,,,,,,,,,0
 Ros,Harry Kane,Croatia,FWD,0,0,,,,,,,,,,,,0
 Vohn,Jordan Pickford,Croatia,GK,0,0,,,,,,,,,,,,0
