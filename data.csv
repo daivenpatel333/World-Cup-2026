@@ -20,12 +20,12 @@ Rahul,Achraf Hakimi,Brazil,DEF,0,0,0,3,0,0,0,0,0,0,0,0,0,1.5
 Daiven,Achraf Hakimi,Brazil,DEF,0,0,0,3,0,0,0,0,0,0,0,0,0,1.5
 Ros,Bruno Guimaraes,Morocco,MID,0,0,1,1,0,0,0,0,0,0,0,0,0,6.5
 Vohn,Vinicius Junior,Morocco,FWD,1,1,0,1,0,0,0,0,0,0,0,0,0,13.5
-Nov,Christian Pulisic,Paraguay,FWD,0,0,1,0,0,0,0,0,0,0,0,0,0,6
+Nov,Christian Pulisic,Paraguay,FWD,0,0,1,0,1,0,0,0,0,0,0,0,0,7
 Brett,Weston McKennie,Paraguay,MID,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Karthik,Christian Pulisic,Paraguay,FWD,0,0,1,0,0,0,0,0,0,0,0,0,0,6
+Karthik,Christian Pulisic,Paraguay,FWD,0,0,1,0,1,0,0,0,0,0,0,0,0,7
 Rahul,Kenan Yildiz,n/a,FWD,0,0,0,6,0,1,0,0,0,0,0,0,0,3.5
 Daiven,Weston McKennie,Paraguay,MID,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Ros,Tyler Adams,Paraguay,MID,0,0,0,0,0,3,1,0,0,0,0,0,0,0
+Ros,Tyler Adams,Paraguay,MID,0,0,0,0,2,3,1,0,0,0,0,0,0,2
 Vohn,Antonee Robinson,Paraguay,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Nov,Moises Caicedo,Ivory Coast,MID,0,0,0,1,0,2,0,0,0,0,0,0,0,1.5
 Brett,Kai Havertz,Curacao,FWD,1,2,0,4,0,1,0,0,0,0,0,0,0,25.5
@@ -82,4 +82,4 @@ Karthik,Harry Kane,Croatia,FWD,1,2,0,7,1,0,0,0,0,0,0,0,0,27.5
 Rahul,Harry Kane,Croatia,FWD,1,2,0,7,1,0,0,0,0,0,0,0,0,27.5
 Daiven,Jude Bellingham,Croatia,MID,0,1,0,3,3,1,0,0,0,0,0,0,0,15
 Ros,Harry Kane,Croatia,FWD,1,2,0,7,1,0,0,0,0,0,0,0,0,27.5
-Vohn,Jordan Pickford,Croatia,GK,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vohn,Jordan Pickford,Croatia,GK,0,0,0,0,0,0,0,0,0,3,2,0,0,2
