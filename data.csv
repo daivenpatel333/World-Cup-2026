@@ -118,12 +118,12 @@ Rahul,Kai Havertz,Ivory Coast,FWD,0,0,0,3,0,0,0,0,0,0,0,0,0,1.5
 Daiven,Manuel Neuer,Ivory Coast,GK,0,0,0,0,0,0,0,0,0,1,1,0,0,0
 Ros,Jonathan Tah,Ivory Coast,DEF,0,0,0,0,1,1,0,0,0,0,0,0,0,1.5
 Vohn,Evan Ndicka,Germany,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Nov,Virgil van Dijk,Sweeden,DEF,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
-Brett,Virgil van Dijk,Sweeden,DEF,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
-Karthik,Virgil van Dijk,Sweeden,DEF,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
+Nov,Virgil van Dijk,Sweden,DEF,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
+Brett,Virgil van Dijk,Sweden,DEF,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
+Karthik,Virgil van Dijk,Sweden,DEF,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
 Rahul,Hiroki Ito,Tunisia,DEF,0,0,0,0,1,0,0,0,0,0,0,1,0,5
-Daiven,Cody Gakpo,Sweeden,FWD,1,2,1,4,0,1,0,0,0,0,0,0,0,31.5
-Ros,Virgil van Dijk,Sweeden,DEF,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
+Daiven,Cody Gakpo,Sweden,FWD,1,2,1,4,0,1,0,0,0,0,0,0,0,31.5
+Ros,Virgil van Dijk,Sweden,DEF,0,0,0,0,0,1,0,0,0,0,0,0,0,0.5
 Vohn,Viktor Gyokeres,Netherlands,FWD,0,0,0,5,0,0,0,0,0,0,0,0,0,2.5
 Nov,Thibaut Courtois,Iran,GK,0,0,0,0,0,0,0,0,0,3,0,1,0,11
 Brett,Mostafa Shobeir,New Zealand,GK,0,0,0,0,0,0,0,0,0,4,1,0,0,6
@@ -188,3 +188,24 @@ Rahul,Achraf Hakimi,Haiti,DEF,1,1,1,5,0,1,0,0,0,0,0,0,0,22
 Daiven,Achraf Hakimi,Haiti,DEF,1,1,1,5,0,1,0,0,0,0,0,0,0,22
 Ros,Bruno Guimaraes,Scotland,MID,0,0,2,1,0,0,0,0,0,0,0,0,0,12.5
 Vohn,Vinicius Junior,Scotland,FWD,1,2,0,8,0,0,0,0,0,0,0,0,0,27
+Nov,Christian Pulisic,Turkeye,FWD,0,0,0,3,0,0,0,0,0,0,0,0,0,1.5
+Brett,Weston McKennie,Turkeye,MID,0,0,0,3,2,1,0,0,0,0,0,0,0,4
+Karthik,Christian Pulisic,Turkeye,FWD,0,0,0,3,0,0,0,0,0,0,0,0,0,1.5
+Rahul,Kenan Yildiz,USA,FWD,0,0,0,2,1,0,0,0,0,0,0,0,0,2
+Daiven,Weston McKennie,Turkeye,MID,0,0,0,3,2,1,0,0,0,0,0,0,0,4
+Ros,Tyler Adams,Turkeye,MID,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vohn,Antonee Robinson,Turkeye,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nov,Moises Caicedo,Germany,MID,0,0,0,1,2,1,0,0,0,0,0,0,0,3
+Brett,Kai Havertz,Ecaudor,FWD,0,0,0,1,2,0,0,0,0,0,0,0,0,2.5
+Karthik,Antonio Rudiger,Ecaudor,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rahul,Kai Havertz,Ecaudor,FWD,0,0,0,1,2,0,0,0,0,0,0,0,0,2.5
+Daiven,Manuel Neuer,Ecaudor,GK,0,0,0,0,0,0,0,0,0,1,2,0,0,-2
+Ros,Jonathan Tah,Ecaudor,DEF,0,0,0,0,2,0,0,0,0,0,0,0,0,2
+Vohn,Evan Ndicka,Curaçao,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Nov,Virgil van Dijk,Tunisia,DEF,0,0,1,1,1,1,0,0,0,0,0,0,0,8
+Brett,Virgil van Dijk,Tunisia,DEF,0,0,1,1,1,1,0,0,0,0,0,0,0,8
+Karthik,Virgil van Dijk,Tunisia,DEF,0,0,1,1,1,1,0,0,0,0,0,0,0,8
+Rahul,Hiroki Ito,Sweden,DEF,0,0,0,0,1,0,0,0,0,0,0,0,0,1
+Daiven,Cody Gakpo,Tunisia,FWD,0,0,0,2,0,0,0,0,0,0,0,0,0,1
+Ros,Virgil van Dijk,Tunisia,DEF,0,0,1,1,1,1,0,0,0,0,0,0,0,8
+Vohn,Viktor Gyokeres,Japan,FWD,0,0,1,1,0,0,0,0,0,0,0,0,0,6.5
