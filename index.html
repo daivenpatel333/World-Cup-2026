@@ -620,22 +620,23 @@
   /* tooltip */
   .figure-tooltip {
     position: absolute;
-    top: -38px;
+    bottom: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
     background: var(--board);
     border: 1px solid var(--board-edge);
-    border-radius: 6px;
-    padding: 5px 10px;
+    border-radius: 8px;
+    padding: 10px 12px;
     font-family: var(--font-mono);
     font-size: 11px;
     color: var(--chalk);
     white-space: nowrap;
+    min-width: 160px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.15s ease;
-    z-index: 10;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    z-index: 100;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.7);
   }
 
   .figure-tooltip::after {
@@ -643,12 +644,63 @@
     position: absolute;
     top: 100%; left: 50%;
     transform: translateX(-50%);
-    border: 5px solid transparent;
+    border: 6px solid transparent;
     border-top-color: var(--board-edge);
   }
 
   .figure-wrap:hover .figure-tooltip {
     opacity: 1;
+  }
+
+  .tooltip-total {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--led);
+    border-bottom: 1px solid var(--turf-line);
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .tooltip-total-label {
+    font-size: 10px;
+    color: var(--chalk-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tooltip-player-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 2px 0;
+    font-size: 10.5px;
+  }
+
+  .tooltip-player-name {
+    color: var(--chalk-dim);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 120px;
+  }
+
+  .tooltip-player-pts {
+    color: var(--chalk);
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tooltip-no-data {
+    color: var(--chalk-dim);
+    font-size: 10px;
+    font-style: italic;
+    text-align: center;
+    padding: 4px 0;
   }
 
 </style>
@@ -824,6 +876,7 @@
 */
 
 const CSV_PATH = "data.csv";
+const KNOCKOUT_CSV_PATH = "knockout.csv";
 
 const CORE_COLS = new Set([
   "Team", "World Cup Player", "Opponent", "Position", "Total Points"
@@ -854,28 +907,28 @@ function num(v){
   return isNaN(n) ? 0 : n;
 }
 
-fetch(CSV_PATH)
-  .then(res => {
-    if(!res.ok) throw new Error("HTTP " + res.status);
-    return res.text();
-  })
-  .then(csvText => {
-    const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
-    if(parsed.errors && parsed.errors.length){
-      console.warn("CSV parse warnings:", parsed.errors);
-    }
-    render(parsed.data, parsed.meta.fields || []);
-  })
-  .catch(err => {
+// Load data.csv and knockout.csv in parallel; knockout.csv is optional
+Promise.allSettled([
+  fetch(CSV_PATH).then(r => { if(!r.ok) throw new Error("HTTP "+r.status); return r.text(); }),
+  fetch(KNOCKOUT_CSV_PATH).then(r => { if(!r.ok) throw new Error("HTTP "+r.status); return r.text(); }),
+]).then(([mainResult, knockoutResult]) => {
+  if(mainResult.status === "rejected"){
     document.getElementById("standings").innerHTML =
       `<div class="status error">
-        Couldn't load <strong>${CSV_PATH}</strong> (${err.message}).<br>
-        Make sure data.csv sits next to this HTML file and that you're viewing
-        this page via a local/hosted server (not double-clicking the file).
+        Couldn't load <strong>${CSV_PATH}</strong> (${mainResult.reason.message}).<br>
+        Make sure data.csv sits next to this HTML file and that you're serving it
+        via a local or hosted server (not double-clicking the file).
       </div>`;
-  });
+    return;
+  }
+  const mainParsed = Papa.parse(mainResult.value, { header: true, skipEmptyLines: true });
+  const knockoutParsed = knockoutResult.status === "fulfilled"
+    ? Papa.parse(knockoutResult.value, { header: true, skipEmptyLines: true })
+    : { data: [], meta: { fields: [] } };
+  render(mainParsed.data, mainParsed.meta.fields || [], knockoutParsed.data);
+});
 
-function render(rows, fields){
+function render(rows, fields, knockoutRows){
   rows = rows.filter(r => r["Team"] && r["World Cup Player"]);
 
   // extra stat columns beyond the core ones, in CSV order
@@ -904,9 +957,28 @@ function render(rows, fields){
     team.total += pts;
   });
 
+  // ---- Build knockoutTeams Map from knockout.csv rows ----
+  // knockoutTeams: teamName -> { total, players: [{name, total}] }
+  const knockoutTeams = new Map();
+  (knockoutRows || []).filter(r => r["Team"] && r["World Cup Player"]).forEach(row => {
+    const teamName = row["Team"].trim();
+    const playerName = row["World Cup Player"].trim();
+    const pts = num(row["Total Points"]);
+
+    if(!knockoutTeams.has(teamName)){
+      knockoutTeams.set(teamName, { total: 0, players: new Map() });
+    }
+    const kt = knockoutTeams.get(teamName);
+    if(!kt.players.has(playerName)){
+      kt.players.set(playerName, 0);
+    }
+    kt.players.set(playerName, kt.players.get(playerName) + pts);
+    kt.total += pts;
+  });
+
   const uniqueness = computeUniquenessScores(teams);
 
-  renderKnockout(teams);
+  renderKnockout(teams, knockoutTeams);
   renderStandings(teams, uniqueness);
   renderSquads(teams, extraCols);
 }
@@ -919,28 +991,29 @@ function render(rows, fields){
 // Scores are then averaged across each team's roster.
 
 // ── Knockout monkey-bars scene ───────────────────────────────────────────────
-function renderKnockout(teams) {
+function renderKnockout(teams, knockoutTeams) {
   const arena = document.getElementById("knockout-arena");
   if (!arena) return;
 
-  const teamNames = [...teams.keys()];
+  // Use teams from data.csv as the source of team names/order,
+  // falling back to knockoutTeams if data.csv has no rows yet.
+  const teamNames = teams.size > 0
+    ? [...teams.keys()]
+    : [...(knockoutTeams || new Map()).keys()];
   const n = teamNames.length;
   if (n === 0) return;
 
-  // Team colors matching the standings
   const COLORS = [
     "#ff6b6b","#4cc9f0","#80ed99","#ffd60a",
     "#c77dff","#ff9f1c","#f72585","#90be6d"
   ];
 
-  // Remove any existing figures
   arena.querySelectorAll(".figure-wrap").forEach(el => el.remove());
 
   const arenaW = arena.offsetWidth || 900;
 
   teamNames.forEach((teamName, i) => {
     const color = COLORS[i % COLORS.length];
-    // Spread evenly, leaving 5% margin on each side
     const pct = 0.05 + (i / (n - 1 || 1)) * 0.90;
     const x = arenaW * pct;
 
@@ -948,14 +1021,45 @@ function renderKnockout(teams) {
     wrap.className = "figure-wrap";
     wrap.style.left = x + "px";
 
-    // Tooltip
+    // ── Rich tooltip ─────────────────────────────────────────────────────────
     const tooltip = document.createElement("div");
     tooltip.className = "figure-tooltip";
-    tooltip.textContent = teamName;
 
-    // Stick figure SVG
-    // Anatomy: grip arms up, body, swinging legs
-    // viewBox 40x120: arms reach top bar at y=0, head at y=18, body to y=68, legs to y=110
+    const kt = knockoutTeams && knockoutTeams.get(teamName);
+    if (kt) {
+      // Total score header
+      const totalRow = document.createElement("div");
+      totalRow.className = "tooltip-total";
+      totalRow.innerHTML = `
+        <span class="tooltip-total-label">${escapeHtml(teamName)}</span>
+        <span>${kt.total.toFixed(1)} pts</span>
+      `;
+      tooltip.appendChild(totalRow);
+
+      // Players sorted by score descending
+      const sorted = [...kt.players.entries()].sort((a,b) => b[1] - a[1]);
+      sorted.forEach(([pName, pPts]) => {
+        const row = document.createElement("div");
+        row.className = "tooltip-player-row";
+        row.innerHTML = `
+          <span class="tooltip-player-name">${escapeHtml(pName)}</span>
+          <span class="tooltip-player-pts">${pPts.toFixed(1)}</span>
+        `;
+        tooltip.appendChild(row);
+      });
+    } else {
+      // No knockout.csv data yet for this team
+      const totalRow = document.createElement("div");
+      totalRow.className = "tooltip-total";
+      totalRow.innerHTML = `<span class="tooltip-total-label">${escapeHtml(teamName)}</span><span>— pts</span>`;
+      tooltip.appendChild(totalRow);
+      const noData = document.createElement("div");
+      noData.className = "tooltip-no-data";
+      noData.textContent = "No knockout data yet";
+      tooltip.appendChild(noData);
+    }
+
+    // ── Stick figure SVG ─────────────────────────────────────────────────────
     const SVG_W = 40, SVG_H = 120;
     const svgNS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNS, "svg");
@@ -983,25 +1087,18 @@ function renderKnockout(teams) {
     }
 
     const cx = SVG_W / 2;
-
-    // Arms reaching up to grip bar
-    svg.appendChild(line(cx, 20, cx - 14, 2,  2));   // left arm
-    svg.appendChild(line(cx, 20, cx + 14, 2,  2));   // right arm
-    // Grip circles at bar
+    svg.appendChild(line(cx, 20, cx - 14, 2,  2));
+    svg.appendChild(line(cx, 20, cx + 14, 2,  2));
     svg.appendChild(circle(cx - 14, 2, 2.5));
     svg.appendChild(circle(cx + 14, 2, 2.5));
-    // Head
     svg.appendChild(circle(cx, 26, 8));
-    // Body
     svg.appendChild(line(cx, 34, cx, 70, 2.5));
-    // Legs (slightly apart, dangling)
     svg.appendChild(line(cx, 70, cx - 10, 100, 2.5));
     svg.appendChild(line(cx, 70, cx + 10, 100, 2.5));
-    // Feet
     svg.appendChild(line(cx - 10, 100, cx - 16, 110, 2));
     svg.appendChild(line(cx + 10, 100, cx + 16, 110, 2));
 
-    // Label below
+    // Label below figure
     const label = document.createElement("div");
     label.className = "figure-label";
     label.textContent = teamName;
