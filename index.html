@@ -617,29 +617,28 @@
     text-align: center;
   }
 
-  /* tooltip */
-  .figure-tooltip {
-    position: absolute;
-    bottom: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
+  /* floating global tooltip — lives outside the arena so overflow:hidden
+     never clips it. Positioned by JS on mousemove. */
+  #ko-tooltip {
+    position: fixed;
     background: var(--board);
     border: 1px solid var(--board-edge);
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 10px 14px;
     font-family: var(--font-mono);
     font-size: 11px;
     color: var(--chalk);
-    white-space: nowrap;
-    min-width: 160px;
-    opacity: 0;
+    min-width: 180px;
     pointer-events: none;
-    transition: opacity 0.15s ease;
-    z-index: 100;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.12s ease;
+    z-index: 9999;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.75);
   }
 
-  .figure-tooltip::after {
+  #ko-tooltip.visible { opacity: 1; }
+
+  #ko-tooltip::after {
     content: "";
     position: absolute;
     top: 100%; left: 50%;
@@ -648,12 +647,8 @@
     border-top-color: var(--board-edge);
   }
 
-  .figure-wrap:hover .figure-tooltip {
-    opacity: 1;
-  }
-
   .tooltip-total {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--led);
     border-bottom: 1px solid var(--turf-line);
@@ -662,7 +657,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 12px;
+    gap: 16px;
   }
 
   .tooltip-total-label {
@@ -675,9 +670,9 @@
   .tooltip-player-row {
     display: flex;
     justify-content: space-between;
-    gap: 12px;
-    padding: 2px 0;
-    font-size: 10.5px;
+    gap: 16px;
+    padding: 3px 0;
+    font-size: 11px;
   }
 
   .tooltip-player-name {
@@ -685,7 +680,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 120px;
+    max-width: 130px;
   }
 
   .tooltip-player-pts {
@@ -991,12 +986,61 @@ function render(rows, fields, knockoutRows){
 // Scores are then averaged across each team's roster.
 
 // ── Knockout monkey-bars scene ───────────────────────────────────────────────
+// Global floating tooltip — outside the clipped arena
+const koTooltipEl = document.getElementById("ko-tooltip");
+let koTooltipVisible = false;
+
+function buildTooltipContent(teamName, kt) {
+  let html = "";
+  if (kt) {
+    html += `<div class="tooltip-total">
+      <span class="tooltip-total-label">${escapeHtml(teamName)}</span>
+      <span>${kt.total.toFixed(1)} pts</span>
+    </div>`;
+    const sorted = [...kt.players.entries()].sort((a,b) => b[1] - a[1]);
+    sorted.forEach(([pName, pPts]) => {
+      html += `<div class="tooltip-player-row">
+        <span class="tooltip-player-name">${escapeHtml(pName)}</span>
+        <span class="tooltip-player-pts">${pPts.toFixed(1)}</span>
+      </div>`;
+    });
+  } else {
+    html += `<div class="tooltip-total">
+      <span class="tooltip-total-label">${escapeHtml(teamName)}</span>
+      <span>— pts</span>
+    </div>
+    <div class="tooltip-no-data">No knockout data yet</div>`;
+  }
+  return html;
+}
+
+function showKoTooltip(e, html) {
+  koTooltipEl.innerHTML = html;
+  koTooltipEl.classList.add("visible");
+  positionKoTooltip(e);
+}
+
+function hideKoTooltip() {
+  koTooltipEl.classList.remove("visible");
+}
+
+function positionKoTooltip(e) {
+  const TW = koTooltipEl.offsetWidth;
+  const TH = koTooltipEl.offsetHeight;
+  const GAP = 14;
+  let x = e.clientX - TW / 2;
+  let y = e.clientY - TH - GAP;
+  // Keep within viewport
+  x = Math.max(8, Math.min(x, window.innerWidth - TW - 8));
+  if (y < 8) y = e.clientY + GAP;
+  koTooltipEl.style.left = x + "px";
+  koTooltipEl.style.top  = y + "px";
+}
+
 function renderKnockout(teams, knockoutTeams) {
   const arena = document.getElementById("knockout-arena");
   if (!arena) return;
 
-  // Use teams from data.csv as the source of team names/order,
-  // falling back to knockoutTeams if data.csv has no rows yet.
   const teamNames = teams.size > 0
     ? [...teams.keys()]
     : [...(knockoutTeams || new Map()).keys()];
@@ -1021,43 +1065,13 @@ function renderKnockout(teams, knockoutTeams) {
     wrap.className = "figure-wrap";
     wrap.style.left = x + "px";
 
-    // ── Rich tooltip ─────────────────────────────────────────────────────────
-    const tooltip = document.createElement("div");
-    tooltip.className = "figure-tooltip";
-
+    // ── Tooltip events (global floating div, not clipped by arena) ───────────
     const kt = knockoutTeams && knockoutTeams.get(teamName);
-    if (kt) {
-      // Total score header
-      const totalRow = document.createElement("div");
-      totalRow.className = "tooltip-total";
-      totalRow.innerHTML = `
-        <span class="tooltip-total-label">${escapeHtml(teamName)}</span>
-        <span>${kt.total.toFixed(1)} pts</span>
-      `;
-      tooltip.appendChild(totalRow);
+    const tooltipHTML = buildTooltipContent(teamName, kt);
 
-      // Players sorted by score descending
-      const sorted = [...kt.players.entries()].sort((a,b) => b[1] - a[1]);
-      sorted.forEach(([pName, pPts]) => {
-        const row = document.createElement("div");
-        row.className = "tooltip-player-row";
-        row.innerHTML = `
-          <span class="tooltip-player-name">${escapeHtml(pName)}</span>
-          <span class="tooltip-player-pts">${pPts.toFixed(1)}</span>
-        `;
-        tooltip.appendChild(row);
-      });
-    } else {
-      // No knockout.csv data yet for this team
-      const totalRow = document.createElement("div");
-      totalRow.className = "tooltip-total";
-      totalRow.innerHTML = `<span class="tooltip-total-label">${escapeHtml(teamName)}</span><span>— pts</span>`;
-      tooltip.appendChild(totalRow);
-      const noData = document.createElement("div");
-      noData.className = "tooltip-no-data";
-      noData.textContent = "No knockout data yet";
-      tooltip.appendChild(noData);
-    }
+    wrap.addEventListener("mouseenter", e => showKoTooltip(e, tooltipHTML));
+    wrap.addEventListener("mousemove",  e => positionKoTooltip(e));
+    wrap.addEventListener("mouseleave", ()  => hideKoTooltip());
 
     // ── Stick figure SVG ─────────────────────────────────────────────────────
     const SVG_W = 40, SVG_H = 120;
@@ -1098,13 +1112,11 @@ function renderKnockout(teams, knockoutTeams) {
     svg.appendChild(line(cx - 10, 100, cx - 16, 110, 2));
     svg.appendChild(line(cx + 10, 100, cx + 16, 110, 2));
 
-    // Label below figure
     const label = document.createElement("div");
     label.className = "figure-label";
     label.textContent = teamName;
     label.style.color = color;
 
-    wrap.appendChild(tooltip);
     wrap.appendChild(svg);
     wrap.appendChild(label);
     arena.appendChild(wrap);
@@ -1311,5 +1323,6 @@ function escapeHtml(str){
 }
 </script>
 
+<div id="ko-tooltip"></div>
 </body>
 </html>
