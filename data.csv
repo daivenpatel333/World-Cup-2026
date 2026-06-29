@@ -222,7 +222,7 @@ Karthik,Pedri,Uruguay,MID,0,0,0,0,1,0,0,0,0,0,0,0,0,1
 Rahul,Federico Valverde,Spain,MID,0,0,0,0,2,1,0,0,0,0,0,0,0,2.5
 Daiven,Lamine Yamal,Uruguay,FWD,0,0,0,1,1,1,0,0,0,0,0,0,0,2
 Ros,Lamine Yamal,Uruguay,FWD,0,0,0,1,1,1,0,0,0,0,0,0,0,2
-Vohn,Mikel Oyarzabal,Uruguay,FWD,0,0,2,4,0,0,0,0,0,0,0,0,0,14
+Vohn,Mikel Oyarzabal,Uruguay,FWD,0,0,0,1,0,0,0,0,0,0,0,0,0,0.5
 Nov,Kylian Mbappe,Norway,FWD,0,0,2,4,0,0,0,0,0,0,0,0,0,14
 Brett,Kylian Mbappe,Norway,FWD,0,0,2,4,0,0,0,0,0,0,0,0,0,14
 Karthik,Kylian Mbappe,Norway,FWD,0,0,2,4,0,0,0,0,0,0,0,0,0,14
@@ -251,3 +251,5 @@ Rahul,Harry Kane,Panama,FWD,0,1,0,3,0,0,0,0,0,0,0,0,0,11.5
 Daiven,Jude Bellingham,Panama,MID,1,1,1,2,4,0,0,0,0,0,0,0,0,24
 Ros,Harry Kane,Panama,FWD,0,1,0,3,0,0,0,0,0,0,0,0,0,11.5
 Vohn,Jordan Pickford,Panama,GK,0,0,0,0,0,0,0,0,0,2,0,1,0,9
+Brett,Alphonso Davies,South Africa,DEF,0,0,0,0,0,0,0,0,0,0,0,1,0,4
+Karthik,Alphonso Davies,South Africa,DEF,0,0,0,0,0,0,0,0,0,0,0,1,0,4
