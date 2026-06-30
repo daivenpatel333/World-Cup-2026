@@ -721,36 +721,40 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--chalk-dim);
-
-  /* ---------- KNOCKED-OUT (fallen into fire) FIGURE ---------- */
-  @keyframes ko-fall {
-    0%   { top: 16px;  transform: translateX(-50%) rotate(0deg); }
-    55%  { top: 170px; transform: translateX(-50%) rotate(190deg); }
-    70%  { top: 158px; transform: translateX(-50%) rotate(170deg); }
-    100% { top: 168px; transform: translateX(-50%) rotate(180deg); }
+    margin-top: 2px;
+    white-space: nowrap;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
   }
 
-  @keyframes ko-agonize {
-    0%, 100% { transform: translateX(-50%) rotate(178deg) scaleX(1); }
-    20%      { transform: translateX(-50%) rotate(186deg) scaleX(0.96); }
-    40%      { transform: translateX(-50%) rotate(172deg) scaleX(1.03); }
-    60%      { transform: translateX(-50%) rotate(184deg) scaleX(0.97); }
-    80%      { transform: translateX(-50%) rotate(176deg) scaleX(1.02); }
+  /* ---------- KNOCKED-OUT (fallen into fire) FIGURE ---------- */
+  /* Single continuous loop: falls once (0-15%), then writhes in the fire
+     forever (15-100%, repeating). animation-iteration-count: infinite on
+     ONE keyframe set guarantees it keeps looping like a GIF. */
+  @keyframes ko-burn {
+    0%   { top: 16px;  transform: translateX(-50%) rotate(0deg)   scaleX(1); }
+    15%  { top: 168px; transform: translateX(-50%) rotate(180deg) scaleX(1); }
+    32%  { top: 168px; transform: translateX(-50%) rotate(172deg) scaleX(1.04); }
+    49%  { top: 164px; transform: translateX(-50%) rotate(188deg) scaleX(0.96); }
+    66%  { top: 168px; transform: translateX(-50%) rotate(174deg) scaleX(1.03); }
+    83%  { top: 166px; transform: translateX(-50%) rotate(186deg) scaleX(0.97); }
+    100% { top: 168px; transform: translateX(-50%) rotate(180deg) scaleX(1); }
   }
 
   .figure-wrap.knocked-out {
-    animation: ko-fall 0.9s cubic-bezier(.55,.05,.65,1) forwards;
+    animation: ko-burn 2.6s ease-in-out infinite;
     cursor: pointer;
   }
 
   .figure-wrap.knocked-out .figure-svg {
-    animation: ko-agonize 0.45s ease-in-out infinite;
-    animation-delay: 0.9s;
     filter: drop-shadow(0 0 6px #ff5722) drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+    transition: none; /* never fight the looping animation */
   }
 
   .figure-wrap.knocked-out:hover .figure-svg {
-    transform: none; /* don't fight with the agonize animation on hover */
+    transform: none; /* don't fight with the burn animation on hover */
   }
 
   .figure-wrap.knocked-out .figure-label {
@@ -760,13 +764,6 @@
 
   .figure-wrap.knocked-out .figure-label::after {
     content: " 💀";
-  }
-    margin-top: 2px;
-    white-space: nowrap;
-    max-width: 70px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
   }
 
   /* floating global tooltip — lives outside the arena so overflow:hidden
@@ -1261,12 +1258,10 @@ function renderKnockout(teams, knockoutTeams, knockedOutSet) {
     wrap.title = isOut ? `${teamName} — KNOCKED OUT` : teamName;
 
     if (isOut) {
-      // Stagger fall start + slightly vary duration so a crowd of
-      // eliminated teams doesn't move in lockstep.
-      const delay = (i % 5) * 0.12;
-      const dur = 0.8 + (i % 4) * 0.08;
+      // Stagger the loop start so a crowd of eliminated figures doesn't
+      // writhe in perfect unison.
+      const delay = -((i % 7) * 0.35); // negative delay = starts partway into the loop
       wrap.style.animationDelay = `${delay}s`;
-      wrap.style.animationDuration = `${dur}s`;
     }
 
     const kt = knockoutTeams && knockoutTeams.get(teamName);
@@ -1285,9 +1280,6 @@ function renderKnockout(teams, knockoutTeams, knockedOutSet) {
     svg.setAttribute("width",  SVG_W);
     svg.setAttribute("height", SVG_H);
     svg.classList.add("figure-svg");
-    if (isOut) {
-      svg.style.animationDelay = `${(i % 5) * 0.12 + 0.8 + (i % 4) * 0.08}s`;
-    }
 
     const figColor = isOut ? "#ff5722" : color;
 
