@@ -1183,11 +1183,10 @@ function showKoDetail(teamName, kt, color, isOut) {
       <tr>
         <td class="kd-rank">${idx + 1}</td>
         <td>${escapeHtml(pName)}</td>
-        <td style="text-align:right">${p.pkMisses ? p.pkMisses.toFixed(0) : "—"}</td>
         <td class="kd-pts">${p.pts.toFixed(1)}</td>
       </tr>`).join("");
   } else {
-    body = `<tr><td colspan="4" class="ko-detail-no-data">No knockout.csv data for this team yet</td></tr>`;
+    body = `<tr><td colspan="3" class="ko-detail-no-data">No knockout.csv data for this team yet</td></tr>`;
   }
 
   const total = kt ? kt.total.toFixed(1) : "—";
@@ -1210,7 +1209,6 @@ function showKoDetail(teamName, kt, color, isOut) {
         <tr>
           <th>#</th>
           <th>Player</th>
-          <th style="text-align:right">PK Shootout Misses</th>
           <th style="text-align:right">Points</th>
         </tr>
       </thead>
