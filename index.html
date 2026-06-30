@@ -525,6 +525,19 @@
     color: var(--led);
   }
 
+  .ko-eliminated-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #ff8a50;
+    background: rgba(255,87,34,0.12);
+    border: 1px solid rgba(255,87,34,0.4);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+
   .ko-detail-close {
     background: none;
     border: 1px solid var(--turf-line);
@@ -708,6 +721,46 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--chalk-dim);
+
+  /* ---------- KNOCKED-OUT (fallen into fire) FIGURE ---------- */
+  @keyframes ko-fall {
+    0%   { top: 16px;  transform: translateX(-50%) rotate(0deg); }
+    55%  { top: 170px; transform: translateX(-50%) rotate(190deg); }
+    70%  { top: 158px; transform: translateX(-50%) rotate(170deg); }
+    100% { top: 168px; transform: translateX(-50%) rotate(180deg); }
+  }
+
+  @keyframes ko-agonize {
+    0%, 100% { transform: translateX(-50%) rotate(178deg) scaleX(1); }
+    20%      { transform: translateX(-50%) rotate(186deg) scaleX(0.96); }
+    40%      { transform: translateX(-50%) rotate(172deg) scaleX(1.03); }
+    60%      { transform: translateX(-50%) rotate(184deg) scaleX(0.97); }
+    80%      { transform: translateX(-50%) rotate(176deg) scaleX(1.02); }
+  }
+
+  .figure-wrap.knocked-out {
+    animation: ko-fall 0.9s cubic-bezier(.55,.05,.65,1) forwards;
+    cursor: pointer;
+  }
+
+  .figure-wrap.knocked-out .figure-svg {
+    animation: ko-agonize 0.45s ease-in-out infinite;
+    animation-delay: 0.9s;
+    filter: drop-shadow(0 0 6px #ff5722) drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  }
+
+  .figure-wrap.knocked-out:hover .figure-svg {
+    transform: none; /* don't fight with the agonize animation on hover */
+  }
+
+  .figure-wrap.knocked-out .figure-label {
+    color: #ff8a50;
+    text-decoration: line-through;
+  }
+
+  .figure-wrap.knocked-out .figure-label::after {
+    content: " 💀";
+  }
     margin-top: 2px;
     white-space: nowrap;
     max-width: 70px;
@@ -976,6 +1029,7 @@
 
 const CSV_PATH = "data.csv";
 const KNOCKOUT_CSV_PATH = "knockout.csv";
+const KNOCKED_OUT_CSV_PATH = "knocked_out.csv";
 
 const CORE_COLS = new Set([
   "Team", "World Cup Player", "Opponent", "Position", "Total Points"
@@ -1006,11 +1060,13 @@ function num(v){
   return isNaN(n) ? 0 : n;
 }
 
-// Load data.csv and knockout.csv in parallel; knockout.csv is optional
+// Load data.csv, knockout.csv, and knocked_out.csv in parallel.
+// knockout.csv and knocked_out.csv are both optional.
 Promise.allSettled([
   fetch(CSV_PATH).then(r => { if(!r.ok) throw new Error("HTTP "+r.status); return r.text(); }),
   fetch(KNOCKOUT_CSV_PATH).then(r => { if(!r.ok) throw new Error("HTTP "+r.status); return r.text(); }),
-]).then(([mainResult, knockoutResult]) => {
+  fetch(KNOCKED_OUT_CSV_PATH).then(r => { if(!r.ok) throw new Error("HTTP "+r.status); return r.text(); }),
+]).then(([mainResult, knockoutResult, knockedOutResult]) => {
   if(mainResult.status === "rejected"){
     document.getElementById("standings").innerHTML =
       `<div class="status error">
@@ -1024,10 +1080,13 @@ Promise.allSettled([
   const knockoutParsed = knockoutResult.status === "fulfilled"
     ? Papa.parse(knockoutResult.value, { header: true, skipEmptyLines: true })
     : { data: [], meta: { fields: [] } };
-  render(mainParsed.data, mainParsed.meta.fields || [], knockoutParsed.data);
+  const knockedOutParsed = knockedOutResult.status === "fulfilled"
+    ? Papa.parse(knockedOutResult.value, { header: true, skipEmptyLines: true })
+    : { data: [], meta: { fields: [] } };
+  render(mainParsed.data, mainParsed.meta.fields || [], knockoutParsed.data, knockedOutParsed.data);
 });
 
-function render(rows, fields, knockoutRows){
+function render(rows, fields, knockoutRows, knockedOutRows){
   rows = rows.filter(r => r["Team"] && r["World Cup Player"]);
 
   // extra stat columns beyond the core ones, in CSV order
@@ -1078,9 +1137,21 @@ function render(rows, fields, knockoutRows){
     kt.total += pts;
   });
 
+  // ---- Build set of knocked-out team names from knocked_out.csv ----
+  // Single-column CSV; header may be "Player" or "Team" depending on how
+  // it's exported, so just take the first column's values per row.
+  const knockedOutSet = new Set(
+    (knockedOutRows || [])
+      .map(row => {
+        const firstKey = Object.keys(row)[0];
+        return (row[firstKey] || "").trim();
+      })
+      .filter(name => name !== "")
+  );
+
   const uniqueness = computeUniquenessScores(teams);
 
-  renderKnockout(teams, knockoutTeams);
+  renderKnockout(teams, knockoutTeams, knockedOutSet);
   renderStandings(teams, uniqueness);
   renderSquads(teams, extraCols);
 }
@@ -1095,7 +1166,7 @@ function render(rows, fields, knockoutRows){
 // ── Knockout monkey-bars scene ───────────────────────────────────────────────
 let activeKoTeam = null;
 
-function showKoDetail(teamName, kt, color) {
+function showKoDetail(teamName, kt, color, isOut) {
   const panel = document.getElementById("ko-detail");
   const inner = document.getElementById("ko-detail-inner");
 
@@ -1123,10 +1194,14 @@ function showKoDetail(teamName, kt, color) {
   }
 
   const total = kt ? kt.total.toFixed(1) : "—";
+  const eliminatedBadge = isOut
+    ? `<span class="ko-eliminated-badge">💀 Eliminated</span>`
+    : "";
   inner.innerHTML = `
     <div class="ko-detail-head">
-      <div>
+      <div style="display:flex;align-items:center;gap:10px;">
         <div class="ko-detail-title" style="color:${color}">${escapeHtml(teamName)}</div>
+        ${eliminatedBadge}
       </div>
       <div style="display:flex;align-items:center;gap:16px;">
         <span class="ko-detail-total">${total} pts</span>
@@ -1156,7 +1231,7 @@ function closeKoDetail() {
   document.querySelectorAll(".figure-wrap.active").forEach(el => el.classList.remove("active"));
 }
 
-function renderKnockout(teams, knockoutTeams) {
+function renderKnockout(teams, knockoutTeams, knockedOutSet) {
   const arena = document.getElementById("knockout-arena");
   if (!arena) return;
 
@@ -1177,19 +1252,29 @@ function renderKnockout(teams, knockoutTeams) {
     const color = COLORS[i % COLORS.length];
     const pct = 0.05 + (i / (n - 1 || 1)) * 0.90;
     const x = arenaW * pct;
+    const isOut = knockedOutSet && knockedOutSet.has(teamName);
 
     const wrap = document.createElement("div");
-    wrap.className = "figure-wrap";
+    wrap.className = "figure-wrap" + (isOut ? " knocked-out" : "");
     wrap.style.left = x + "px";
     wrap.style.cursor = "pointer";
-    wrap.title = teamName;
+    wrap.title = isOut ? `${teamName} — KNOCKED OUT` : teamName;
+
+    if (isOut) {
+      // Stagger fall start + slightly vary duration so a crowd of
+      // eliminated teams doesn't move in lockstep.
+      const delay = (i % 5) * 0.12;
+      const dur = 0.8 + (i % 4) * 0.08;
+      wrap.style.animationDelay = `${delay}s`;
+      wrap.style.animationDuration = `${dur}s`;
+    }
 
     const kt = knockoutTeams && knockoutTeams.get(teamName);
 
     wrap.addEventListener("click", () => {
       document.querySelectorAll(".figure-wrap.active").forEach(el => el.classList.remove("active"));
       wrap.classList.add("active");
-      showKoDetail(teamName, kt, color);
+      showKoDetail(teamName, kt, color, isOut);
     });
 
     // ── Stick figure SVG ─────────────────────────────────────────────────────
@@ -1200,12 +1285,17 @@ function renderKnockout(teams, knockoutTeams) {
     svg.setAttribute("width",  SVG_W);
     svg.setAttribute("height", SVG_H);
     svg.classList.add("figure-svg");
+    if (isOut) {
+      svg.style.animationDelay = `${(i % 5) * 0.12 + 0.8 + (i % 4) * 0.08}s`;
+    }
+
+    const figColor = isOut ? "#ff5722" : color;
 
     function line(x1,y1,x2,y2,w=2.5) {
       const el = document.createElementNS(svgNS, "line");
       el.setAttribute("x1",x1); el.setAttribute("y1",y1);
       el.setAttribute("x2",x2); el.setAttribute("y2",y2);
-      el.setAttribute("stroke", color);
+      el.setAttribute("stroke", figColor);
       el.setAttribute("stroke-width", w);
       el.setAttribute("stroke-linecap", "round");
       return el;
@@ -1214,27 +1304,52 @@ function renderKnockout(teams, knockoutTeams) {
       const el = document.createElementNS(svgNS, "circle");
       el.setAttribute("cx",cx); el.setAttribute("cy",cy); el.setAttribute("r",r);
       el.setAttribute("fill","none");
-      el.setAttribute("stroke", color);
+      el.setAttribute("stroke", figColor);
       el.setAttribute("stroke-width",2.5);
       return el;
     }
 
     const cx = SVG_W / 2;
-    svg.appendChild(line(cx, 20, cx - 14, 2,  2));
-    svg.appendChild(line(cx, 20, cx + 14, 2,  2));
-    svg.appendChild(circle(cx - 14, 2, 2.5));
-    svg.appendChild(circle(cx + 14, 2, 2.5));
-    svg.appendChild(circle(cx, 26, 8));
-    svg.appendChild(line(cx, 34, cx, 70, 2.5));
-    svg.appendChild(line(cx, 70, cx - 10, 100, 2.5));
-    svg.appendChild(line(cx, 70, cx + 10, 100, 2.5));
-    svg.appendChild(line(cx - 10, 100, cx - 16, 110, 2));
-    svg.appendChild(line(cx + 10, 100, cx + 16, 110, 2));
+
+    if (!isOut) {
+      // Normal hanging figure — gripping the bar
+      svg.appendChild(line(cx, 20, cx - 14, 2,  2));
+      svg.appendChild(line(cx, 20, cx + 14, 2,  2));
+      svg.appendChild(circle(cx - 14, 2, 2.5));
+      svg.appendChild(circle(cx + 14, 2, 2.5));
+      svg.appendChild(circle(cx, 26, 8));
+      svg.appendChild(line(cx, 34, cx, 70, 2.5));
+      svg.appendChild(line(cx, 70, cx - 10, 100, 2.5));
+      svg.appendChild(line(cx, 70, cx + 10, 100, 2.5));
+      svg.appendChild(line(cx - 10, 100, cx - 16, 110, 2));
+      svg.appendChild(line(cx + 10, 100, cx + 16, 110, 2));
+    } else {
+      // Knocked-out figure — arms flailing up in panic, agonized face
+      svg.appendChild(line(cx, 34, cx - 16, 14, 2));   // left arm flailing
+      svg.appendChild(line(cx, 34, cx + 16, 14, 2));   // right arm flailing
+      svg.appendChild(circle(cx, 26, 8));               // head
+      // Agonized face: X eyes + open grimace mouth
+      svg.appendChild(line(cx - 4, 23, cx - 1, 26, 1.3));
+      svg.appendChild(line(cx - 1, 23, cx - 4, 26, 1.3));
+      svg.appendChild(line(cx + 1, 23, cx + 4, 26, 1.3));
+      svg.appendChild(line(cx + 4, 23, cx + 1, 26, 1.3));
+      const mouth = document.createElementNS(svgNS, "ellipse");
+      mouth.setAttribute("cx", cx); mouth.setAttribute("cy", 30);
+      mouth.setAttribute("rx", 2.5); mouth.setAttribute("ry", 2);
+      mouth.setAttribute("fill", figColor);
+      svg.appendChild(mouth);
+      // Body + flailing legs
+      svg.appendChild(line(cx, 34, cx, 70, 2.5));
+      svg.appendChild(line(cx, 70, cx - 14, 92, 2.5));
+      svg.appendChild(line(cx, 70, cx + 14, 92, 2.5));
+      svg.appendChild(line(cx - 14, 92, cx - 20, 104, 2));
+      svg.appendChild(line(cx + 14, 92, cx + 20, 104, 2));
+    }
 
     const label = document.createElement("div");
     label.className = "figure-label";
     label.textContent = teamName;
-    label.style.color = color;
+    label.style.color = isOut ? "#ff8a50" : color;
 
     wrap.appendChild(svg);
     wrap.appendChild(label);
