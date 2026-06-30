@@ -1057,21 +1057,24 @@ function render(rows, fields, knockoutRows){
   });
 
   // ---- Build knockoutTeams Map from knockout.csv rows ----
-  // knockoutTeams: teamName -> { total, players: [{name, total}] }
+  // knockoutTeams: teamName -> { total, players: Map(name -> {pts, pkMisses}) }
   const knockoutTeams = new Map();
   (knockoutRows || []).filter(r => r["Team"] && r["World Cup Player"]).forEach(row => {
     const teamName = row["Team"].trim();
     const playerName = row["World Cup Player"].trim();
     const pts = num(row["Total Points"]);
+    const pkMisses = num(row["Penalty Shootout Misses"]);
 
     if(!knockoutTeams.has(teamName)){
       knockoutTeams.set(teamName, { total: 0, players: new Map() });
     }
     const kt = knockoutTeams.get(teamName);
     if(!kt.players.has(playerName)){
-      kt.players.set(playerName, 0);
+      kt.players.set(playerName, { pts: 0, pkMisses: 0 });
     }
-    kt.players.set(playerName, kt.players.get(playerName) + pts);
+    const p = kt.players.get(playerName);
+    p.pts += pts;
+    p.pkMisses += pkMisses;
     kt.total += pts;
   });
 
@@ -1107,15 +1110,16 @@ function showKoDetail(teamName, kt, color) {
 
   let body = "";
   if (kt && kt.players.size > 0) {
-    const sorted = [...kt.players.entries()].sort((a,b) => b[1] - a[1]);
-    body = sorted.map(([pName, pPts], idx) => `
+    const sorted = [...kt.players.entries()].sort((a,b) => b[1].pts - a[1].pts);
+    body = sorted.map(([pName, p], idx) => `
       <tr>
         <td class="kd-rank">${idx + 1}</td>
         <td>${escapeHtml(pName)}</td>
-        <td class="kd-pts">${pPts.toFixed(1)}</td>
+        <td style="text-align:right">${p.pkMisses ? p.pkMisses.toFixed(0) : "—"}</td>
+        <td class="kd-pts">${p.pts.toFixed(1)}</td>
       </tr>`).join("");
   } else {
-    body = `<tr><td colspan="3" class="ko-detail-no-data">No knockout.csv data for this team yet</td></tr>`;
+    body = `<tr><td colspan="4" class="ko-detail-no-data">No knockout.csv data for this team yet</td></tr>`;
   }
 
   const total = kt ? kt.total.toFixed(1) : "—";
@@ -1134,6 +1138,7 @@ function showKoDetail(teamName, kt, color) {
         <tr>
           <th>#</th>
           <th>Player</th>
+          <th style="text-align:right">PK Shootout Misses</th>
           <th style="text-align:right">Points</th>
         </tr>
       </thead>
@@ -1155,9 +1160,7 @@ function renderKnockout(teams, knockoutTeams) {
   const arena = document.getElementById("knockout-arena");
   if (!arena) return;
 
-  const teamNames = teams.size > 0
-    ? [...teams.keys()]
-    : [...(knockoutTeams || new Map()).keys()];
+  const teamNames = [...(knockoutTeams || new Map()).keys()];
   const n = teamNames.length;
   if (n === 0) return;
 
@@ -1404,6 +1407,7 @@ function shortLabel(col){
     "Tackles Won": "Tkl",
     "Interceptions": "Int",
     "Regulation Penalty Kick Misses": "PK Miss",
+    "Penalty Shootout Misses": "PK SO Miss",
     "Penalty Kick Saves": "PK Save",
     "Goals Against": "GA",
     "Clean Sheets": "CS",
