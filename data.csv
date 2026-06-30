@@ -33,7 +33,7 @@ Karthik,Antonio Rudiger,Curacao,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Rahul,Kai Havertz,Curacao,FWD,1,2,0,4,0,1,0,0,0,0,0,0,0,25.5
 Daiven,Manuel Neuer,Curacao,GK,0,0,0,0,0,0,0,0,0,1,1,0,0,0
 Ros,Jonathan Tah,Curacao,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Vohn,Evan Ndicka,Curacao,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Vohn,Evan Ndicka,Ecaudor,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Nov,Virgil van Dijk,Japan,DEF,1,1,0,1,0,1,0,0,0,0,0,0,0,14
 Brett,Virgil van Dijk,Japan,DEF,1,1,0,1,0,1,0,0,0,0,0,0,0,14
 Karthik,Virgil van Dijk,Japan,DEF,1,1,0,1,0,1,0,0,0,0,0,0,0,14
@@ -253,3 +253,19 @@ Ros,Harry Kane,Panama,FWD,0,1,0,3,0,0,0,0,0,0,0,0,0,11.5
 Vohn,Jordan Pickford,Panama,GK,0,0,0,0,0,0,0,0,0,2,0,1,0,9
 Brett,Alphonso Davies,South Africa,DEF,0,0,0,0,0,0,0,0,0,0,0,1,0,4
 Karthik,Alphonso Davies,South Africa,DEF,0,0,0,0,0,0,0,0,0,0,0,1,0,4
+Karthik,Alisson,Japan,GK,0,0,0,0,0,0,0,0,0,1,1,0,0,2
+Rahul,Achraf Hakimi,Netherlands,DEF,0,0,0,3,1,2,0,0,0,0,0,0,0,3.5
+Daiven,Achraf Hakimi,Netherlands,DEF,0,0,0,3,1,2,0,0,0,0,0,0,0,3.5
+Ros,Bruno Guimaraes,Japan,MID,0,0,1,4,1,1,0,0,0,0,0,0,0,9.5
+Vohn,Vinicius Junior,Japan,FWD,0,0,0,3,0,1,0,0,0,0,0,0,0,2
+Brett,Kai Havertz,Paraguay,FWD,0,1,0,4,0,0,1,0,0,0,0,0,0,10.5
+Karthik,Antonio Rudiger,Paraguay,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rahul,Kai Havertz,Paraguay,FWD,0,1,0,4,0,0,1,0,0,0,0,0,0,10.5
+Daiven,Manuel Neuer,Paraguay,GK,0,0,0,0,0,0,0,0,0,2,1,0,0,2
+Ros,Jonathan Tah,Paraguay,DEF,0,0,0,0,1,0,0,0,0,0,0,0,0,1
+Nov,Virgil van Dijk,Morocco,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brett,Virgil van Dijk,Morocco,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Karthik,Virgil van Dijk,Morocco,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Rahul,Hiroki Ito,Brazil,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Daiven,Cody Gakpo,Morocco,FWD,0,1,0,1,1,0,0,0,0,0,0,0,0,11.5
+Ros,Virgil van Dijk,Morocco,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0

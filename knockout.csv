@@ -1,38 +1,38 @@
 Team,World Cup Player,Opponent,Position,Official Man of the Match,Goals,Assists,Shots,Tackles Won,Interceptions,Yellow Cards,Red Cards,Penalty Shootout Misses,Regulation Penalty Kick Misses,Saves,Goals Against,Clean Sheets,Penalty Kick Saves,Total Points
 Rahul,nobody,none,none,,,,,,,,,,,,,,,
-Daiven,Halland,Ivory Coast,FWD,,,,,,,,,,,0,0,0,0,0
-Daiven,Kane,DR Congo,FWD,,,,,,,,,,,,,,,
-Daiven,Havertz,Paraguay,FWD,,,,,,,,,,,,,,,
-Daiven,Mac Allister,Cape Verde,MID,,,,,,,,,,,,,,,
-Daiven,Romero,Cape Verde,DEF,,,,,,,,,,,,,,,
-Daiven,Rice,DR Congo,MID,,,,,,,,,,,,,,,
-Brett,Havertz,Paraguay,FWD,,,,,,,,,,,,,,,
-Brett,Salah,Australia,FWD,,,,,,,,,,,,,,,
-Brett,Dembele,Sweden,FWD,,,,,,,,,,,,,,,
-Brett,Bruno,Croatia,MID,,,,,,,,,,,,,,,
-Brett,O'Rielly,DR Congo,DEF,,,,,,,,,,,,,,,
-Brett,Enzo,Cape Verde,MID,,,,,,,,,,,,,,,
-Karthik,Mbappe,Sweden,FWD,,,,,,,,,,,,,,,
-Karthik,Halland,Ivory Coast,FWD,,,,,,,,,,,,,,,
-Karthik,Manzambi,Algeria,MID,,,,,,,,,,,,,,,
-Karthik,Jude,DR Congo,MID,,,,,,,,,,,,,,,
-Karthik,Gabriel,Japan,DEF,,,,,,,,,,,,,,,
-Karthik,De Bruyne,Senegal,MID,,,,,,,,,,,,,,,
-Ros,Vini,Japan,FWD,,,,,,,,,,,,,,,
-Ros,David,South Africa,FWD,,,,,,,,,,,,,,,
-Ros,Salah,Australia,FWD,,,,,,,,,,,,,,,
-Ros,Plata,Mexico,MID,,,,,,,,,,,,,,,
-Ros,Tah,Paraguay,DEF,,,,,,,,,,,,,,,
-Ros,Vlasic,Portugal,MID,,,,,,,,,,,,,,,
-Vohn,Mbappe,Sweden,FWD,,,,,,,,,,,,,,,
-Vohn,Alvarez,Cape Verde,FWD,,,,,,,,,,,,,,,
-Vohn,Pulisic,Bosnia,FWD,,,,,,,,,,,,,,,
-Vohn,Bruno,Croatia,MID,,,,,,,,,,,,,,,
-Vohn,Hakimi,Netherlands,DEF,,,,,,,,,,,,,,,
-Vohn,Musiala,Paraguay,MID,,,,,,,,,,,,,,,
-Nov,Cunha,Japan,FWD,,,,,,,,,,,,,,,
-Nov,Halland,Ivory Coast,FWD,,,,,,,,,,,,,,,
-Nov,Sane,Paraguay,FWD,,,,,,,,,,,,,,,
-Nov,Rodriguez,Ghana,MID,,,,,,,,,,,,,,,
-Nov,Dumfries,Morocco,DEF,,,,,,,,,,,,,,,
-Nov,Bruno,Croatia,MID,,,,,,,,,,,,,,,
+Daiven,Halland,Ivory Coast,FWD,,,,,,,,,,,,,,,0
+Daiven,Kane,DR Congo,FWD,,,,,,,,,,,,,,,0
+Daiven,Havertz,Paraguay,FWD,0,1,0,4,0,0,1,0,1,0,0,0,0,0,7.5
+Daiven,Mac Allister,Cape Verde,MID,,,,,,,,,,,,,,,0
+Daiven,Romero,Cape Verde,DEF,,,,,,,,,,,,,,,0
+Daiven,Rice,DR Congo,MID,,,,,,,,,,,,,,,0
+Brett,Havertz,Paraguay,FWD,0,1,0,4,0,0,1,0,1,0,0,0,0,0,7.5
+Brett,Salah,Australia,FWD,,,,,,,,,,,,,,,0
+Brett,Dembele,Sweden,FWD,,,,,,,,,,,,,,,0
+Brett,Bruno,Croatia,MID,,,,,,,,,,,,,,,0
+Brett,O'Rielly,DR Congo,DEF,,,,,,,,,,,,,,,0
+Brett,Enzo,Cape Verde,MID,,,,,,,,,,,,,,,0
+Karthik,Mbappe,Sweden,FWD,,,,,,,,,,,,,,,0
+Karthik,Halland,Ivory Coast,FWD,,,,,,,,,,,,,,,0
+Karthik,Manzambi,Algeria,MID,,,,,,,,,,,,,,,0
+Karthik,Jude,DR Congo,MID,,,,,,,,,,,,,,,0
+Karthik,Gabriel,Japan,DEF,,,,,,,,,,,,,,,0
+Karthik,De Bruyne,Senegal,MID,,,,,,,,,,,,,,,0
+Ros,Vini,Japan,FWD,0,0,0,3,0,1,0,0,0,0,0,0,0,0,2
+Ros,David,South Africa,FWD,,,,,,,,,,,,,,,0
+Ros,Salah,Australia,FWD,,,,,,,,,,,,,,,0
+Ros,Plata,Mexico,MID,,,,,,,,,,,,,,,0
+Ros,Tah,Paraguay,DEF,0,0,0,1,0,0,0,0,1,0,0,0,0,0,-2.5
+Ros,Vlasic,Portugal,MID,,,,,,,,,,,,,,,0
+Vohn,Mbappe,Sweden,FWD,,,,,,,,,,,,,,,0
+Vohn,Alvarez,Cape Verde,FWD,,,,,,,,,,,,,,,0
+Vohn,Pulisic,Bosnia,FWD,,,,,,,,,,,,,,,0
+Vohn,Bruno,Croatia,MID,,,,,,,,,,,,,,,0
+Vohn,Hakimi,Netherlands,DEF,0,0,0,3,1,2,0,0,1,0,0,0,0,0,0.5
+Vohn,Musiala,Paraguay,MID,,,,,,,,,,,,,,,0
+Nov,Cunha,Japan,FWD,,,,,,,,,,,,,,,0
+Nov,Halland,Ivory Coast,FWD,,,,,,,,,,,,,,,0
+Nov,Sane,Paraguay,FWD,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1
+Nov,Rodriguez,Ghana,MID,,,,,,,,,,,,,,,0
+Nov,Dumfries,Morocco,DEF,,,,,,,,,,,,,,,0
+Nov,Bruno ,Croatia,MID,,,,,,,,,,,,,,,0
