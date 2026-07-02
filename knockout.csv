@@ -1,23 +1,23 @@
 Team,World Cup Player,Opponent,Position,Official Man of the Match,Goals,Assists,Shots,Tackles Won,Interceptions,Yellow Cards,Red Cards,Penalty Shootout Misses,Regulation Penalty Kick Misses,Saves,Goals Against,Clean Sheets,Penalty Kick Saves,Total Points
 Rahul,nobody,none,none,,,,,,,,,,,,,,,
 Daiven,Halland,Ivory Coast,FWD,0,1,0,4,0,0,0,0,0,0,0,0,0,0,12
-Daiven,Kane,DR Congo,FWD,,,,,,,,,,,,,,,0
+Daiven,Kane,DR Congo,FWD,1,2,0,5,0,1,0,0,0,0,0,0,0,0,26
 Daiven,Havertz,Paraguay,FWD,0,1,0,4,0,0,1,0,1,0,0,0,0,0,7.5
 Daiven,Mac Allister,Cape Verde,MID,,,,,,,,,,,,,,,0
 Daiven,Romero,Cape Verde,DEF,,,,,,,,,,,,,,,0
-Daiven,Rice,DR Congo,MID,,,,,,,,,,,,,,,0
+Daiven,Rice,DR Congo,MID,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Brett,Havertz,Paraguay,FWD,0,1,0,4,0,0,1,0,1,0,0,0,0,0,7.5
 Brett,Salah,Australia,FWD,,,,,,,,,,,,,,,0
 Brett,Dembele,Sweden,FWD,0,0,1,2,0,1,0,0,0,0,0,0,0,0,7.5
 Brett,Bruno,Croatia,MID,,,,,,,,,,,,,,,0
-Brett,O'Rielly,DR Congo,DEF,,,,,,,,,,,,,,,0
+Brett,O'Rielly,DR Congo,DEF,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1
 Brett,Enzo,Cape Verde,MID,,,,,,,,,,,,,,,0
 Karthik,Mbappe,Sweden,FWD,1,2,0,5,0,0,0,0,0,0,0,0,0,0,25.5
 Karthik,Halland,Ivory Coast,FWD,0,1,0,4,0,0,0,0,0,0,0,0,0,0,12
 Karthik,Manzambi,Algeria,MID,,,,,,,,,,,,,,,0
-Karthik,Jude,DR Congo,MID,,,,,,,,,,,,,,,0
+Karthik,Jude,DR Congo,MID,0,0,0,3,0,0,1,0,0,0,0,0,0,0,0
 Karthik,Gabriel,Japan,DEF,,,,,,,,,,,,,,,0
-Karthik,De Bruyne,Senegal,MID,,,,,,,,,,,,,,,0
+Karthik,De Bruyne,Senegal,MID,0,0,0,2,0,0,0,0,0,0,0,0,0,0,1
 Ros,Vini,Japan,FWD,0,0,0,3,0,1,0,0,0,0,0,0,0,0,2
 Ros,David,South Africa,FWD,0,0,0,2,0,1,0,0,0,0,0,0,0,0,1.5
 Ros,Salah,Australia,FWD,,,,,,,,,,,,,,,0
@@ -26,11 +26,11 @@ Ros,Tah,Paraguay,DEF,0,0,0,1,0,0,0,0,1,0,0,0,0,0,-2.5
 Ros,Vlasic,Portugal,MID,,,,,,,,,,,,,,,0
 Vohn,Mbappe,Sweden,FWD,1,2,0,5,0,0,0,0,0,0,0,0,0,0,25.5
 Vohn,Alvarez,Cape Verde,FWD,,,,,,,,,,,,,,,0
-Vohn,Pulisic,Bosnia,FWD,,,,,,,,,,,,,,,0
+Vohn,Pulisic,Bosnia,FWD,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0.5
 Vohn,Bruno,Croatia,MID,,,,,,,,,,,,,,,0
 Vohn,Hakimi,Netherlands,DEF,0,0,0,3,1,2,0,0,1,0,0,0,0,0,0.5
 Vohn,Musiala,Paraguay,MID,0,0,0,0,0,1,1,0,0,0,0,0,0,0,-1
-Nov,Cunha,Japan,FWD,,,,,,,,,,,,,,,0
+Nov,Cunha,Japan,FWD,0,0,0,3,1,0,0,0,0,0,0,0,0,0,2.5
 Nov,Halland,Ivory Coast,FWD,0,1,0,4,0,0,0,0,0,0,0,0,0,0,12
 Nov,Sane,Paraguay,FWD,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1
 Nov,Rodriguez,Ghana,MID,,,,,,,,,,,,,,,0
