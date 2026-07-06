@@ -256,6 +256,7 @@ Karthik,Alphonso Davies,South Africa,DEF,0,0,0,0,0,0,0,0,0,0,0,1,0,4
 Karthik,Alisson,Japan,GK,0,0,0,0,0,0,0,0,0,1,1,0,0,2
 Rahul,Achraf Hakimi,Netherlands,DEF,0,0,0,3,1,2,0,0,0,0,0,0,0,3.5
 Daiven,Achraf Hakimi,Netherlands,DEF,0,0,0,3,1,2,0,0,0,0,0,0,0,3.5
+Nov,Achraf Hakimi,Netherlands,DEF,0,0,0,3,1,2,0,0,0,0,0,0,0,3.5
 Ros,Bruno Guimaraes,Japan,MID,0,0,1,4,1,1,0,0,0,0,0,0,0,9.5
 Vohn,Vinicius Junior,Japan,FWD,0,0,0,3,0,1,0,0,0,0,0,0,0,2
 Brett,Kai Havertz,Paraguay,FWD,0,1,0,4,0,0,1,0,0,0,0,0,0,10.5
@@ -322,3 +323,63 @@ Rahul,Lionel Messi,Jordan,FWD,1,1,0,9,1,0,0,0,0,0,0,0,0,18.5
 Daiven,Julian Alvarez,Jordan,FWD,0,0,0,1,0,2,0,0,0,0,0,0,0,1.5
 Ros,Lionel Messi,Jordan,FWD,1,1,0,9,1,0,0,0,0,0,0,0,0,18.5
 Vohn,Lionel Messi,Jordan,FWD,1,1,0,9,1,0,0,0,0,0,0,0,0,18.5
+Karthik,Alisson,Norway,GK,0,0,0,0,0,0,0,0,0,3,2,0,0,2
+Nov,Achraf Hakimi,Netherlands,DEF,0,0,1,0,2,1,1,0,0,0,0,1,0,11
+Rahul,Achraf Hakimi,Canada,DEF,0,0,1,0,2,1,1,0,0,0,0,1,0,11
+Daiven,Achraf Hakimi,Canada,DEF,0,0,1,0,2,1,1,0,0,0,0,1,0,11
+Ros,Bruno Guimaraes,Norway,MID,0,0,0,2,1,0,0,0,1,0,0,0,0,-3
+Brett,Vinicius Junior,Norway,FWD,0,0,0,2,1,0,0,0,0,0,0,0,0,2
+Vohn,Vinicius Junior,Norway,FWD,0,0,0,2,1,0,0,0,0,0,0,0,0,2
+Nov,Kylian Mbappe,Paraguay,FWD,0,1,0,5,0,0,0,0,0,0,0,0,0,12.5
+Brett,Kylian Mbappe,Paraguay,FWD,0,1,0,5,0,0,0,0,0,0,0,0,0,12.5
+Karthik,Kylian Mbappe,Paraguay,FWD,0,1,0,5,0,0,0,0,0,0,0,0,0,12.5
+Rahul,Kylian Mbappe,Paraguay,FWD,0,1,0,5,0,0,0,0,0,0,0,0,0,12.5
+Daiven,Kylian Mbappe,Paraguay,FWD,0,1,0,5,0,0,0,0,0,0,0,0,0,12.5
+Ros,Kylian Mbappe,Paraguay,FWD,0,1,0,5,0,0,0,0,0,0,0,0,0,12.5
+Vohn,Kylian Mbappe,Paraguay,FWD,0,1,0,5,0,0,0,0,0,0,0,0,0,12.5
+Nov,Christian Pulisic,Belgium,FWD,,,,,,,,,,,,,,0
+Brett,Weston McKennie,Belgium,MID,,,,,,,,,,,,,,0
+Karthik,Christian Pulisic,Belgium,FWD,,,,,,,,,,,,,,0
+Daiven,Weston McKennie,Belgium,MID,,,,,,,,,,,,,,0
+Ros,Tyler Adams,Belgium,MID,,,,,,,,,,,,,,0
+Vohn,Antonee Robinson,Belgium,DEF,,,,,,,,,,,,,,0
+Nov,Thibaut Courtois,USA,GK,,,,,,,,,,,,,,0
+Rahul,Thibaut Courtois,USA,GK,,,,,,,,,,,,,,0
+Daiven,Kevin De Bruyne,USA,MID,,,,,,,,,,,,,,0
+Vohn,Kevin De Bruyne,USA,MID,,,,,,,,,,,,,,0
+Nov,Harry Kane,Mexico,FWD,0,1,1,1,1,0,0,0,0,0,0,0,0,17.5
+Brett,Harry Kane,Mexico,FWD,0,1,1,1,1,0,0,0,0,0,0,0,0,17.5
+Karthik,Harry Kane,Mexico,FWD,0,1,1,1,1,0,0,0,0,0,0,0,0,17.5
+Rahul,Harry Kane,Mexico,FWD,0,1,1,1,1,0,0,0,0,0,0,0,0,17.5
+Daiven,Jude Bellingham,Mexico,MID,1,2,0,3,2,0,0,0,0,0,0,0,0,26.5
+Ros,Harry Kane,Mexico,FWD,0,1,1,1,1,0,0,0,0,0,0,0,0,17.5
+Vohn,Jordan Pickford,Mexico,GK,0,0,0,0,0,0,0,0,0,3,2,0,0,2
+Rahul,Manuel Akanji,Columbia,DEF,,,,,,,,,,,,,,0
+Daiven,Manuel Akanji,Columbia,DEF,,,,,,,,,,,,,,0
+Ros,Manuel Akanji,Columbia,DEF,,,,,,,,,,,,,,0
+Vohn,Granit Xhaka,Columbia,MID,,,,,,,,,,,,,,0
+Nov,Mikel Oyarzabal,Portugal,FWD,,,,,,,,,,,,,,0
+Brett,Rodri,Portugal,MID,,,,,,,,,,,,,,0
+Karthik,Pedri,Portugal,MID,,,,,,,,,,,,,,0
+Daiven,Lamine Yamal,Portugal,FWD,,,,,,,,,,,,,,0
+Ros,Lamine Yamal,Portugal,FWD,,,,,,,,,,,,,,0
+Vohn,Mikel Oyarzabal,Portugal,FWD,,,,,,,,,,,,,,0
+Nov,Bruno Fernandes,Spain,MID,,,,,,,,,,,,,,0
+Brett,Bruno Fernandes,Spain,MID,,,,,,,,,,,,,,0
+Karthik,Bruno Fernandes,Spain,MID,,,,,,,,,,,,,,0
+Daiven,Cristiano Ronaldo,Spain,FWD,,,,,,,,,,,,,,0
+Rahul,Bruno Fernandes,Spain,MID,,,,,,,,,,,,,,0
+Ros,Bruno Fernandes,Spain,MID,,,,,,,,,,,,,,0
+Vohn,Bruno Fernandes,Spain,MID,,,,,,,,,,,,,,0
+Brett,Mostafa Shobeir,Argentina,GK,,,,,,,,,,,,,,0
+Karthik,Mohamed Salah,Argentina,FWD,,,,,,,,,,,,,,0
+Ros,Mostafa Shobeir,Argentina,GK,,,,,,,,,,,,,,0
+Nov,Lionel Messi,Egypt,FWD,,,,,,,,,,,,,,0
+Brett,Lionel Messi,Egypt,FWD,,,,,,,,,,,,,,0
+Karthik,Lionel Messi,Egypt,FWD,,,,,,,,,,,,,,0
+Rahul,Lionel Messi,Egypt,FWD,,,,,,,,,,,,,,0
+Daiven,Julian Alvarez,Egypt,FWD,,,,,,,,,,,,,,0
+Ros,Lionel Messi,Egypt,FWD,,,,,,,,,,,,,,0
+Vohn,Lionel Messi,Egypt,FWD,,,,,,,,,,,,,,0
+Brett,Alphonso Davies,South Africa,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Karthik,Alphonso Davies,South Africa,DEF,0,0,0,0,0,0,0,0,0,0,0,0,0,0
