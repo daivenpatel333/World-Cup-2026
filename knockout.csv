@@ -2,7 +2,7 @@ Team,World Cup Player,Opponent,Position,Official Man of the Match,Goals,Assists,
 Rahul,nobody,none,none,,,,,,,,,,,,,,,
 Ros,nobody,none,none,,,,,,,,,,,,,,,
 Daiven,Dembele,,FWD,0,0,0,2,0,0,0,0,0,0,0,0,0,0,1
-Daiven,Messi,,FWD,,,,,,,,,,,,,,,0
+Daiven,Messi,,FWD,1,1,1,5,1,,,,,1,,,,,17.5
 Daiven,Vini Jr,,FWD,0,0,0,2,1,0,0,0,0,0,0,0,0,0,2
 Daiven,Jude,,MID,1,2,0,3,2,0,0,0,0,0,0,2,0,0,26.5
 Daiven,Hakimi,,DEF,0,0,1,0,2,1,1,0,0,0,0,0,1,0,10
@@ -10,24 +10,24 @@ Daiven,Kounde,,DEF,0,0,0,0,1,0,0,0,0,0,0,0,1,0,4
 Brett,Halland,,FWD,1,2,0,4,0,1,0,0,0,0,0,0,0,0,25.5
 Brett,Vini Jr,,FWD,0,0,0,2,1,0,0,0,0,0,0,0,0,0,2
 Brett,Lucho Diaz,,FWD,,,,,,,,,,,,,,,0
-Brett,Mac Allister,,MID,,,,,,,,,,,,,,,0
+Brett,Mac Allister,,MID,,,,2,3,,,,,,,,,,4
 Brett,Hakimi,,DEF,0,0,1,0,2,1,1,0,0,0,0,0,1,0,10
 Brett,Rabiot,,MID,0,0,0,3,1,0,0,0,0,0,0,0,1,0,5.5
-Karthik,Oyerzabal,,FWD,,,,,,,,,,,,,,,0
+Karthik,Oyerzabal,,FWD,,,,2,,,,,,,,,,,1
 Karthik,Vini Jr,,FWD,0,0,0,2,1,0,0,0,0,0,0,0,0,0,2
 Karthik,Embolo,,FWD,,,,,,,,,,,,,,,0
 Karthik,Odegaard,,MID,0,0,0,3,0,0,0,0,0,0,0,2,0,0,1.5
 Karthik,O'Rielly,,DEF,0,0,0,0,0,0,1,0,0,0,0,2,0,0,-1.5
 Karthik,Rice,,MID,0,0,0,1,0,1,1,0,0,0,0,2,0,0,-0.5
 Vohn,Kane,,FWD,0,1,1,1,1,0,0,0,0,0,0,0,0,0,17.5
-Vohn,Messi,,FWD,,,,,,,,,,,,,,,0
+Vohn,Messi,,FWD,1,1,1,5,1,,,,,1,,,,,17.5
 Vohn,Vini Jr,,FWD,0,0,0,2,1,0,0,0,0,0,0,0,0,0,2
 Vohn,Jude,,MID,1,2,0,3,2,0,0,0,0,0,0,2,0,0,26.5
-Vohn,Cucurella,,DEF,,,,,,,,,,,,,,,0
+Vohn,Cucurella,,DEF,,,,,,1,,,,,,,1,,3.5
 Vohn,Manzambi,,MID,,,,,,,,,,,,,,,0
-Nov,Salah,,FWD,,,,,,,,,,,,,,,0
+Nov,Salah,,FWD,0,0,0,0,0,,0,0,0,0,0,0,0,0,0
 Nov,Dembele,,FWD,0,0,0,2,0,0,0,0,0,0,0,0,0,0,1
 Nov,Lucho Diaz,,FWD,,,,,,,,,,,,,,,0
 Nov,Bruno G,,MID,0,0,0,2,1,0,0,0,0,1,0,0,0,0,-3
-Nov,Cucurella,,DEF,,,,,,,,,,,,,,,0
+Nov,Cucurella,,DEF,,,,,,1,,,,,,,1,,3.5
 Nov,Hakimi,,MID,0,0,1,0,2,1,1,0,0,0,0,0,1,0,10
