@@ -354,12 +354,12 @@ Rahul,Harry Kane,Mexico,FWD,0,1,1,1,1,0,0,0,0,0,0,0,0,17.5
 Daiven,Jude Bellingham,Mexico,MID,1,2,0,3,2,0,0,0,0,0,0,0,0,26.5
 Ros,Harry Kane,Mexico,FWD,0,1,1,1,1,0,0,0,0,0,0,0,0,17.5
 Vohn,Jordan Pickford,Mexico,GK,0,0,0,0,0,0,0,0,0,3,2,0,0,2
-Rahul,Manuel Akanji,Columbia,DEF,,,,,,,,,,,,,,0
-Daiven,Manuel Akanji,Columbia,DEF,,,,,,,,,,,,,,0
-Ros,Manuel Akanji,Columbia,DEF,,,,,,,,,,,,,,0
-Vohn,Granit Xhaka,Columbia,MID,,,,,,,,,,,,,,0
+Rahul,Manuel Akanji,Columbia,DEF,,,,,1,1,,,,,,1,,5.5
+Daiven,Manuel Akanji,Columbia,DEF,,,,,1,1,,,,,,1,,5.5
+Ros,Manuel Akanji,Columbia,DEF,,,,,1,1,,,,,,1,,5.5
+Vohn,Granit Xhaka,Columbia,MID,,,,1,,,1,,,,,,,-1
 Nov,Mikel Oyarzabal,Portugal,FWD,,,,2,,,,,,,,,,1
-Brett,Rodri,Portugal,MID,1,,,1,4,,,,,,,,,5
+Brett,Rodri,Portugal,MID,1,,,1,4,,,,,,,0,,5
 Karthik,Pedri,Portugal,MID,,,,1,1,1,,,,,,,,6
 Daiven,Lamine Yamal,Portugal,FWD,,,,3,4,1,,,,,,,,5
 Ros,Lamine Yamal,Portugal,FWD,,,,3,4,1,,,,,,,,6
